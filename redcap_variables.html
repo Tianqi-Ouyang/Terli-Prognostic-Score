@@ -1,0 +1,3068 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tianqi Ouyang">
+<meta name="dcterms.date" content="2026-04-14">
+
+<title>REDCap Variable List – Terlipressin — Xing Prognostic Scores</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b6a8276bf55561bdbc268162d41bd1f7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-0a88f20bc220c5ea00eeb2dcfc10659b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Terlipressin — Xing Prognostic Scores</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Summary</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./redcap_variables.html" aria-current="page"> 
+<span class="menu-text">REDCap Variables</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./derived_variables.html"> 
+<span class="menu-text">Derived Variables</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./analysis.html"> 
+<span class="menu-text">Analysis</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#demographics" id="toc-demographics" class="nav-link active" data-scroll-target="#demographics">Demographics</a></li>
+  <li><a href="#medical-history" id="toc-medical-history" class="nav-link" data-scroll-target="#medical-history">Medical History</a>
+  <ul class="collapse">
+  <li><a href="#comorbidities" id="toc-comorbidities" class="nav-link" data-scroll-target="#comorbidities">Comorbidities</a></li>
+  <li><a href="#pre-admission-home-medications" id="toc-pre-admission-home-medications" class="nav-link" data-scroll-target="#pre-admission-home-medications">Pre-Admission / Home Medications</a></li>
+  <li><a href="#history-of-previous-cirrhosis-complications" id="toc-history-of-previous-cirrhosis-complications" class="nav-link" data-scroll-target="#history-of-previous-cirrhosis-complications">History of Previous Cirrhosis Complications</a></li>
+  <li><a href="#baseline-creatinine" id="toc-baseline-creatinine" class="nav-link" data-scroll-target="#baseline-creatinine">Baseline Creatinine</a></li>
+  </ul></li>
+  <li><a href="#admit-labs" id="toc-admit-labs" class="nav-link" data-scroll-target="#admit-labs">Labs within 72 Hours of Admission</a></li>
+  <li><a href="#aki-details" id="toc-aki-details" class="nav-link" data-scroll-target="#aki-details">AKI Details</a>
+  <ul class="collapse">
+  <li><a href="#details-of-initial-aki-diagnosis" id="toc-details-of-initial-aki-diagnosis" class="nav-link" data-scroll-target="#details-of-initial-aki-diagnosis">Details of Initial AKI Diagnosis</a></li>
+  <li><a href="#vital-signs-at-time-of-initial-aki" id="toc-vital-signs-at-time-of-initial-aki" class="nav-link" data-scroll-target="#vital-signs-at-time-of-initial-aki">Vital Signs at Time of Initial AKI</a></li>
+  <li><a href="#labs-at-time-of-initial-aki" id="toc-labs-at-time-of-initial-aki" class="nav-link" data-scroll-target="#labs-at-time-of-initial-aki">Labs at Time of Initial AKI</a></li>
+  <li><a href="#details-for-prognosis-scores-at-time-of-initial-aki" id="toc-details-for-prognosis-scores-at-time-of-initial-aki" class="nav-link" data-scroll-target="#details-for-prognosis-scores-at-time-of-initial-aki">Details for Prognosis Scores at Time of Initial AKI</a></li>
+  </ul></li>
+  <li><a href="#cardiopulmonary" id="toc-cardiopulmonary" class="nav-link" data-scroll-target="#cardiopulmonary">Cardio-Pulmonary History</a>
+  <ul class="collapse">
+  <li><a href="#pulmonary-and-cardiac-parameters" id="toc-pulmonary-and-cardiac-parameters" class="nav-link" data-scroll-target="#pulmonary-and-cardiac-parameters">Pulmonary and Cardiac Parameters</a></li>
+  </ul></li>
+  <li><a href="#hrs-diagnosis" id="toc-hrs-diagnosis" class="nav-link" data-scroll-target="#hrs-diagnosis">HRS Diagnosis Details</a>
+  <ul class="collapse">
+  <li><a href="#hrs-aki-diagnosis-details" id="toc-hrs-aki-diagnosis-details" class="nav-link" data-scroll-target="#hrs-aki-diagnosis-details">HRS-AKI Diagnosis Details</a></li>
+  <li><a href="#volume-resuscitation-prior-to-terlipressin" id="toc-volume-resuscitation-prior-to-terlipressin" class="nav-link" data-scroll-target="#volume-resuscitation-prior-to-terlipressin">Volume Resuscitation Prior to Terlipressin</a></li>
+  <li><a href="#medications-prior-to-terlipressin" id="toc-medications-prior-to-terlipressin" class="nav-link" data-scroll-target="#medications-prior-to-terlipressin">Medications Prior to Terlipressin</a></li>
+  <li><a href="#consultation-information" id="toc-consultation-information" class="nav-link" data-scroll-target="#consultation-information">Consultation Information</a></li>
+  </ul></li>
+  <li><a href="#urinary-indices" id="toc-urinary-indices" class="nav-link" data-scroll-target="#urinary-indices">Urinary Indices</a></li>
+  <li><a href="#treatment-days" id="toc-treatment-days" class="nav-link" data-scroll-target="#treatment-days">Terlipressin Treatment Days 0–13</a>
+  <ul class="collapse">
+  <li><a href="#terlipressin-treatment" id="toc-terlipressin-treatment" class="nav-link" data-scroll-target="#terlipressin-treatment">Terlipressin Treatment</a></li>
+  <li><a href="#adverse-events-shown-if-discontinued-due-to-adverse-effect" id="toc-adverse-events-shown-if-discontinued-due-to-adverse-effect" class="nav-link" data-scroll-target="#adverse-events-shown-if-discontinued-due-to-adverse-effect">Adverse Events (shown if discontinued due to adverse effect)</a></li>
+  <li><a href="#dosing" id="toc-dosing" class="nav-link" data-scroll-target="#dosing">Dosing</a></li>
+  <li><a href="#concomitant-medications-per-day" id="toc-concomitant-medications-per-day" class="nav-link" data-scroll-target="#concomitant-medications-per-day">Concomitant Medications (per day)</a></li>
+  <li><a href="#vital-signs-per-day-4-time-points" id="toc-vital-signs-per-day-4-time-points" class="nav-link" data-scroll-target="#vital-signs-per-day-4-time-points">Vital Signs (per day, 4 time points)</a></li>
+  <li><a href="#daily-labs-per-day" id="toc-daily-labs-per-day" class="nav-link" data-scroll-target="#daily-labs-per-day">Daily Labs (per day)</a></li>
+  <li><a href="#clinical-details-per-day" id="toc-clinical-details-per-day" class="nav-link" data-scroll-target="#clinical-details-per-day">Clinical Details (per day)</a></li>
+  </ul></li>
+  <li><a href="#hrs-clinical-course" id="toc-hrs-clinical-course" class="nav-link" data-scroll-target="#hrs-clinical-course">HRS-AKI Clinical Course</a>
+  <ul class="collapse">
+  <li><a href="#creatinine-post-terlipressin-discontinuation" id="toc-creatinine-post-terlipressin-discontinuation" class="nav-link" data-scroll-target="#creatinine-post-terlipressin-discontinuation">Creatinine Post Terlipressin Discontinuation</a></li>
+  <li><a href="#hrs-aki-reversal-and-hrs-recovery" id="toc-hrs-aki-reversal-and-hrs-recovery" class="nav-link" data-scroll-target="#hrs-aki-reversal-and-hrs-recovery">HRS-AKI Reversal and HRS Recovery</a></li>
+  <li><a href="#recurrent-aki" id="toc-recurrent-aki" class="nav-link" data-scroll-target="#recurrent-aki">Recurrent AKI</a></li>
+  <li><a href="#nadir-and-peak-serum-creatinine-during-hospitalization" id="toc-nadir-and-peak-serum-creatinine-during-hospitalization" class="nav-link" data-scroll-target="#nadir-and-peak-serum-creatinine-during-hospitalization">Nadir and Peak Serum Creatinine During Hospitalization</a></li>
+  <li><a href="#renal-replacement-therapy" id="toc-renal-replacement-therapy" class="nav-link" data-scroll-target="#renal-replacement-therapy">Renal Replacement Therapy</a></li>
+  </ul></li>
+  <li><a href="#hospitalization" id="toc-hospitalization" class="nav-link" data-scroll-target="#hospitalization">Hospitalization Course</a></li>
+  <li><a href="#followup" id="toc-followup" class="nav-link" data-scroll-target="#followup">Follow-Up</a>
+  <ul class="collapse">
+  <li><a href="#day-follow-up" id="toc-day-follow-up" class="nav-link" data-scroll-target="#day-follow-up">90-Day Follow-Up</a></li>
+  <li><a href="#follow-up-lab-values" id="toc-follow-up-lab-values" class="nav-link" data-scroll-target="#follow-up-lab-values">Follow-Up Lab Values</a></li>
+  <li><a href="#year-follow-up" id="toc-year-follow-up" class="nav-link" data-scroll-target="#year-follow-up">1-Year Follow-Up</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">REDCap Variable List</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tianqi Ouyang </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 14, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Complete variable list from the Terlipressin Database REDCap Code Book (PID: 43500). The database contains 18 instruments with 1500+ fields. Treatment day instruments (Day 0–13) share identical structure and are documented once below.</p>
+<section id="demographics" class="level2">
+<h2 class="anchored" data-anchor-id="demographics">Demographics</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 22%">
+<col style="width: 26%">
+<col style="width: 13%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values / Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;"><code>subjectid</code></td>
+<td style="text-align: left;">Subject ID</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">e.g.&nbsp;BCM-001</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;"><code>admit_date</code></td>
+<td style="text-align: left;">Admit date</td>
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">Required</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;"><code>admit_admitservice</code></td>
+<td style="text-align: left;">Admitting Service</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Medicine, 2 = ICU, 3 = Primary Liver Service, 4 = Surgical, 5 = Other</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;"><code>admit_admitroute</code></td>
+<td style="text-align: left;">Location patient was admitted from</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Emergency Room, 2 = Transfer from outside hospital, 3 = Direct admission</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;"><code>date_birth</code></td>
+<td style="text-align: left;">Date of birth</td>
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">Required</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;"><code>age</code></td>
+<td style="text-align: left;">Age</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"><code>rounddown(datediff(date_birth, admit_date, "y"))</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;"><code>sex_male</code></td>
+<td style="text-align: left;">Sex</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Male, 0 = Female</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;"><code>race</code></td>
+<td style="text-align: left;">Race</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = White, 2 = Black, 3 = Asian, 4 = Other</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;"><code>hispanic</code></td>
+<td style="text-align: left;">Hispanic</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Hispanic or Latino, 0 = Not Hispanic or Latino</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;"><code>insurance_type</code></td>
+<td style="text-align: left;">Type of insurance</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Medicare, 2 = Medicaid, 3 = Private, 4 = Self pay, 5 = Other</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;"><code>cirrhosis_etiology</code></td>
+<td style="text-align: left;">Cirrhosis etiology</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Alcohol, 2 = MASH (NASH), 3 = HCV, 4 = HCV+Alcohol, 5 = MetALD (Alcohol + MASH), 6 = Other</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;"><code>etoh_hepatitis</code></td>
+<td style="text-align: left;">Does patient have alcohol associated hepatitis?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;"><code>admit_reason</code></td>
+<td style="text-align: left;">Reason(s) for admission</td>
+<td style="text-align: left;">checkbox</td>
+<td style="text-align: left;">1 = Overt HE, 2 = Portal hypertension related bleed, 3 = Ascites/Anasarca, 4 = Infection, 5 = AKI, 6 = Other, 7 = Liver-unrelated</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="medical-history" class="level2">
+<h2 class="anchored" data-anchor-id="medical-history">Medical History</h2>
+<section id="comorbidities" class="level3">
+<h3 class="anchored" data-anchor-id="comorbidities">Comorbidities</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;"><code>htn_medical_hx</code></td>
+<td style="text-align: left;">History of hypertension?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">21</td>
+<td style="text-align: left;"><code>dm_medical_hx</code></td>
+<td style="text-align: left;">History of diabetes?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">22</td>
+<td style="text-align: left;"><code>ckd_medical_hx</code></td>
+<td style="text-align: left;">History of chronic kidney disease?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">23</td>
+<td style="text-align: left;"><code>cad_medical_hx</code></td>
+<td style="text-align: left;">History of coronary artery disease?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pre-admission-home-medications" class="level3">
+<h3 class="anchored" data-anchor-id="pre-admission-home-medications">Pre-Admission / Home Medications</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">24</td>
+<td style="text-align: left;"><code>nsbb_preadmission</code></td>
+<td style="text-align: left;">Non-selective beta-blocker?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">25</td>
+<td style="text-align: left;"><code>nsbb_type_preadmission</code></td>
+<td style="text-align: left;">Type of non-selective beta blocker?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Propranolol, 2 = Carvedilol, 3 = Nadolol, 4 = Other</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">26</td>
+<td style="text-align: left;"><code>nsbb_dose_preadmission</code></td>
+<td style="text-align: left;">Total dose per day of non-selective beta blocker total dose (mg)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">0–160</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">27</td>
+<td style="text-align: left;"><code>ace_arb_preadmission</code></td>
+<td style="text-align: left;">ACE-inhibitor or ARB?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">28</td>
+<td style="text-align: left;"><code>nsaid_preadmission</code></td>
+<td style="text-align: left;">NSAID use?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">29</td>
+<td style="text-align: left;"><code>diuretics_preadmission</code></td>
+<td style="text-align: left;">Loop diuretic?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30</td>
+<td style="text-align: left;"><code>potsp_diuretic_preadmission</code></td>
+<td style="text-align: left;">Potassium sparing diuretic?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">31</td>
+<td style="text-align: left;"><code>sbp_ppx_preadmission</code></td>
+<td style="text-align: left;">Spontaneous bacterial peritonitis (SBP) prophylaxis?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = None, 1 = Ciprofloxacin, 2 = Sulfamethoxazole/trimethoprim, 3 = Other</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">32</td>
+<td style="text-align: left;"><code>lactulose_preadmission</code></td>
+<td style="text-align: left;">Lactulose?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">33</td>
+<td style="text-align: left;"><code>rifaximin_preadmission</code></td>
+<td style="text-align: left;">Rifaximin?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">34</td>
+<td style="text-align: left;"><code>mido_preadmission</code></td>
+<td style="text-align: left;">Midodrine</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">35</td>
+<td style="text-align: left;"><code>mido_dose_preadmission</code></td>
+<td style="text-align: left;">Total dose of midodrine per day (mg)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="history-of-previous-cirrhosis-complications" class="level3">
+<h3 class="anchored" data-anchor-id="history-of-previous-cirrhosis-complications">History of Previous Cirrhosis Complications</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">36</td>
+<td style="text-align: left;"><code>ascites_previous_comp</code></td>
+<td style="text-align: left;">Ascites?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">37</td>
+<td style="text-align: left;"><code>refascites_previous_comp</code></td>
+<td style="text-align: left;">Is ascites refractory? Failed maximum doses of diuretics or Diuretic intolerant or Requiring paracentesis &gt;1x within 2 weeks</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">38</td>
+<td style="text-align: left;"><code>he_previous_comp</code></td>
+<td style="text-align: left;">Hepatic encephalopathy?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">39</td>
+<td style="text-align: left;"><code>sbp_previous_comp</code></td>
+<td style="text-align: left;">Spontaneous bacterial peritonitis (SBP)?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">40</td>
+<td style="text-align: left;"><code>nonsbp_previous_comp</code></td>
+<td style="text-align: left;">Non-SBP infections (within previous 90 days)?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">41</td>
+<td style="text-align: left;"><code>phtn_bleed_previous_comp</code></td>
+<td style="text-align: left;">Portal hypertension related bleed?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">42</td>
+<td style="text-align: left;"><code>hcc_previous_comp</code></td>
+<td style="text-align: left;">Hepatocellular carcinoma?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">43</td>
+<td style="text-align: left;"><code>tips_previous_comp</code></td>
+<td style="text-align: left;">History of TIPS?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="baseline-creatinine" class="level3">
+<h3 class="anchored" data-anchor-id="baseline-creatinine">Baseline Creatinine</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 22%">
+<col style="width: 26%">
+<col style="width: 13%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values / Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">44</td>
+<td style="text-align: left;"><code>baseline_scr</code></td>
+<td style="text-align: left;">Baseline creatinine (creatinine value within three months before hospitalization; if more than one value, use closest to admission; if no baseline, use admission creatinine)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL, 0.2–10, Required</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">46</td>
+<td style="text-align: left;"><code>baseline_scr_days_to_admit</code></td>
+<td style="text-align: left;">Days from baseline serum creatinine to admission date</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">47</td>
+<td style="text-align: left;"><code>baseline_scr_outpt</code></td>
+<td style="text-align: left;">Was baseline creatinine an outpatient value?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">48</td>
+<td style="text-align: left;"><code>baseline_scr_120to365</code></td>
+<td style="text-align: left;">Is there an outpatient serum creatinine value 120-365 days from baseline serum creatinine?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">49</td>
+<td style="text-align: left;"><code>baseline_scr_120to365_value</code></td>
+<td style="text-align: left;">Outpatient serum creatinine value 120-365 days from baseline serum creatinine value (mg/dL)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">50</td>
+<td style="text-align: left;"><code>aki_previous_90days</code></td>
+<td style="text-align: left;">Known AKI within 90-days of admission?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">51</td>
+<td style="text-align: left;"><code>aki_events_previous90days</code></td>
+<td style="text-align: left;">How many known AKI events in the previous 90 days?</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="admit-labs" class="level2">
+<h2 class="anchored" data-anchor-id="admit-labs">Labs within 72 Hours of Admission</h2>
+<p><em>Within 72 hours of admission, use the closest value to admission date.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 27%">
+<col style="width: 32%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">58</td>
+<td style="text-align: left;"><code>scr_admit</code></td>
+<td style="text-align: left;">Serum creatinine</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60</td>
+<td style="text-align: left;"><code>cystatinc_admit</code></td>
+<td style="text-align: left;">Cystatin C</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/L</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">62</td>
+<td style="text-align: left;"><code>tbili_admit</code></td>
+<td style="text-align: left;">Total bilirubin</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">64</td>
+<td style="text-align: left;"><code>inr_admit</code></td>
+<td style="text-align: left;">INR</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">–</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">66</td>
+<td style="text-align: left;"><code>sodium_admit</code></td>
+<td style="text-align: left;">Serum sodium</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">68</td>
+<td style="text-align: left;"><code>albumin_admit</code></td>
+<td style="text-align: left;">Admit albumin</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">g/dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">70</td>
+<td style="text-align: left;"><code>lactate_admit</code></td>
+<td style="text-align: left;">Admit Lactate</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">71</td>
+<td style="text-align: left;"><code>hegrade_admit</code></td>
+<td style="text-align: left;">HE grade at admission</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = None, 1 = Grade 1, 2 = Grade 2, 3 = Grade 3, 4 = Grade 4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">72</td>
+<td style="text-align: left;"><code>admit_ascites</code></td>
+<td style="text-align: left;">Ascites severity at admission</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Absent, 2 = Slight/Moderate, 3 = Large/Tense</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aki-details" class="level2">
+<h2 class="anchored" data-anchor-id="aki-details">AKI Details</h2>
+<section id="details-of-initial-aki-diagnosis" class="level3">
+<h3 class="anchored" data-anchor-id="details-of-initial-aki-diagnosis">Details of Initial AKI Diagnosis</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">74</td>
+<td style="text-align: left;"><code>aki_date</code></td>
+<td style="text-align: left;">Date when ICA AKI criteria met (increase in sCr ≥0.3 mg/dl within 48 hours; or a percentage increase in sCr ≥50% from baseline)</td>
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">Required</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">75</td>
+<td style="text-align: left;"><code>days_admit_to_aki</code></td>
+<td style="text-align: left;">Days from admission to ICA AKI event</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">76</td>
+<td style="text-align: left;"><code>aki_precipitant</code></td>
+<td style="text-align: left;">Precipitant of AKI</td>
+<td style="text-align: left;">checkbox</td>
+<td style="text-align: left;">1 = Non-bleeding volume loss/excessive diuretic use, 2 = SBP, 3 = Non-SBP infection, 4 = GI bleed, 5 = Nephrotoxic drugs, 6 = Other, 7 = No identifiable precipitant</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">77</td>
+<td style="text-align: left;"><code>aki_precipitant_nsbpinf</code></td>
+<td style="text-align: left;">If precipitant was non-SBP infection, what was it?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Pneumonia, 2 = UTI, 3 = Bacteremia, 4 = Other</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">52</td>
+<td style="text-align: left;"><code>transfer_aki</code></td>
+<td style="text-align: left;">Was the patient transferred from another hospital with an AKI?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">54</td>
+<td style="text-align: left;"><code>transfer_aki_days_toadmit</code></td>
+<td style="text-align: left;">Days from transfer to admission date</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vital-signs-at-time-of-initial-aki" class="level3">
+<h3 class="anchored" data-anchor-id="vital-signs-at-time-of-initial-aki">Vital Signs at Time of Initial AKI</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 27%">
+<col style="width: 32%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">80</td>
+<td style="text-align: left;"><code>aki_weight</code></td>
+<td style="text-align: left;">Body weight</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">kg (30–150)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">81</td>
+<td style="text-align: left;"><code>aki_height</code></td>
+<td style="text-align: left;">Height</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">cm</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">82</td>
+<td style="text-align: left;"><code>aki_hr</code></td>
+<td style="text-align: left;">Heart Rate (pick the highest value of day of AKI diagnosis)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">BPM</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">83</td>
+<td style="text-align: left;"><code>aki_sbp</code></td>
+<td style="text-align: left;">Systolic BP (pick the lowest value of day of AKI diagnosis)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmHg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">84</td>
+<td style="text-align: left;"><code>aki_dbp</code></td>
+<td style="text-align: left;">Diastolic BP (pick the value associated with systolic BP above)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmHg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">85</td>
+<td style="text-align: left;"><code>aki_map</code></td>
+<td style="text-align: left;">MAP</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;">mmHg; <code>round((1/3)*SBP + (2/3)*DBP, 2)</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">86</td>
+<td style="text-align: left;"><code>aki_spo2</code></td>
+<td style="text-align: left;">SpO2 (pick the lowest value of day of AKI diagnosis)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">87</td>
+<td style="text-align: left;"><code>aki_pao2</code></td>
+<td style="text-align: left;">PaO2 (convert lowest value of SpO2 to PaO2)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmHg (40–150)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">88</td>
+<td style="text-align: left;"><code>fio2_aki</code></td>
+<td style="text-align: left;">FiO2 (pick value associated with SpO2; room air is 0.21, add 0.04 for every L of nasal canula)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">% (0–100)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="labs-at-time-of-initial-aki" class="level3">
+<h3 class="anchored" data-anchor-id="labs-at-time-of-initial-aki">Labs at Time of Initial AKI</h3>
+<p><em>Pick worst value on day of AKI as specified.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 27%">
+<col style="width: 32%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">91</td>
+<td style="text-align: left;"><code>sodium_aki</code></td>
+<td style="text-align: left;">Serum sodium (pick the lowest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">93</td>
+<td style="text-align: left;"><code>potassium_aki</code></td>
+<td style="text-align: left;">Serum potassium (pick the highest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">95</td>
+<td style="text-align: left;"><code>scr_aki</code></td>
+<td style="text-align: left;">Serum creatinine (pick the highest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL, Required</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">97</td>
+<td style="text-align: left;"><code>cystatinc_aki</code></td>
+<td style="text-align: left;">Cystatin C (pick the highest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/L</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">99</td>
+<td style="text-align: left;"><code>bun_aki</code></td>
+<td style="text-align: left;">BUN (pick the highest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">101</td>
+<td style="text-align: left;"><code>tbili_aki</code></td>
+<td style="text-align: left;">Total bilirubin (pick the highest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">103</td>
+<td style="text-align: left;"><code>albumin_aki</code></td>
+<td style="text-align: left;">Albumin (pick the lowest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">g/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">105</td>
+<td style="text-align: left;"><code>inr_aki</code></td>
+<td style="text-align: left;">INR (pick the highest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">–</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">107</td>
+<td style="text-align: left;"><code>wbc_aki</code></td>
+<td style="text-align: left;">Total WBC (pick the highest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">10^9/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">109</td>
+<td style="text-align: left;"><code>plt_aki</code></td>
+<td style="text-align: left;">Platelet count (pick the lowest value)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">10^9/L</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="details-for-prognosis-scores-at-time-of-initial-aki" class="level3">
+<h3 class="anchored" data-anchor-id="details-for-prognosis-scores-at-time-of-initial-aki">Details for Prognosis Scores at Time of Initial AKI</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">110</td>
+<td style="text-align: left;"><code>he_aki</code></td>
+<td style="text-align: left;">HE grade on day of AKI</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = None, 1 = Grade 1 (minimal change in consciousness), 2 = Grade 2 (gross disorientation, drowsiness, asterixis), 3 = Grade 3 (marked confusion, sleeping most of the time but arousable), 4 = Grade 4 (comatose)</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">111</td>
+<td style="text-align: left;"><code>ascites_aki</code></td>
+<td style="text-align: left;">Ascites severity on day of AKI</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Absent, 2 = Slight/Moderate, 3 = Large/Tense</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">112</td>
+<td style="text-align: left;"><code>rrt_aki</code></td>
+<td style="text-align: left;">Was the patient on renal replacement therapy on day of AKI?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">113</td>
+<td style="text-align: left;"><code>mv_aki</code></td>
+<td style="text-align: left;">Was the patient intubated on day of AKI?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">116</td>
+<td style="text-align: left;"><code>pressors_aki</code></td>
+<td style="text-align: left;">Was the patient on vasopressors on day of AKI (e.g., norepinephrine, vasopressin)? Not including terlipressin, midodrine/octreotide.</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cardiopulmonary" class="level2">
+<h2 class="anchored" data-anchor-id="cardiopulmonary">Cardio-Pulmonary History</h2>
+<section id="pulmonary-and-cardiac-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="pulmonary-and-cardiac-parameters">Pulmonary and Cardiac Parameters</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 22%">
+<col style="width: 26%">
+<col style="width: 13%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values / Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">118</td>
+<td style="text-align: left;"><code>chest_imaging</code></td>
+<td style="text-align: left;">Chest imaging obtained prior to terlipressin initiation?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">119</td>
+<td style="text-align: left;"><code>chest_imaging_pulmedema</code></td>
+<td style="text-align: left;">Presence of pulmonary edema/congestion?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">120</td>
+<td style="text-align: left;"><code>chest_imaging_effusion</code></td>
+<td style="text-align: left;">Presence of pleural effusion?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">121</td>
+<td style="text-align: left;"><code>ecg</code></td>
+<td style="text-align: left;">ECG obtained prior to terlipressin initiation?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">124</td>
+<td style="text-align: left;"><code>ecg_qtc</code></td>
+<td style="text-align: left;">Corrected QTC on ECG</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">125</td>
+<td style="text-align: left;"><code>echo</code></td>
+<td style="text-align: left;">Echocardiogram within 1 year of terlipressin initiation?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">127</td>
+<td style="text-align: left;"><code>days_to_echo</code></td>
+<td style="text-align: left;">Days from admission to echocardiogram</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">129</td>
+<td style="text-align: left;"><code>echo_ef</code></td>
+<td style="text-align: left;">LV ejection fraction (take average if range is reported)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">131</td>
+<td style="text-align: left;"><code>echo_lateral_e</code></td>
+<td style="text-align: left;">Lateral e’ velocity</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">cm/sec</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">133</td>
+<td style="text-align: left;"><code>echo_trpeak</code></td>
+<td style="text-align: left;">Peak tricuspid regurgitation velocity</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">cm/sec</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">135</td>
+<td style="text-align: left;"><code>echo_gls</code></td>
+<td style="text-align: left;">Average global longitudinal strain</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">137</td>
+<td style="text-align: left;"><code>echo_earatio</code></td>
+<td style="text-align: left;">Mitral E/A ratio</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">139</td>
+<td style="text-align: left;"><code>echo_eeratio</code></td>
+<td style="text-align: left;">E/e’ ratio</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">141</td>
+<td style="text-align: left;"><code>echo_rvsp</code></td>
+<td style="text-align: left;">Right ventricular systolic pressure</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmHg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">143</td>
+<td style="text-align: left;"><code>echo_pasp</code></td>
+<td style="text-align: left;">Pulmonary artery systolic pressure</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmHg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">145</td>
+<td style="text-align: left;"><code>echo_lavi</code></td>
+<td style="text-align: left;">Left atrial volume index (LAVI)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mL/m2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">147</td>
+<td style="text-align: left;"><code>echo_tr</code></td>
+<td style="text-align: left;">Tricuspid regurgitation (TR) velocity</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">m/sec</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="hrs-diagnosis" class="level2">
+<h2 class="anchored" data-anchor-id="hrs-diagnosis">HRS Diagnosis Details</h2>
+<section id="hrs-aki-diagnosis-details" class="level3">
+<h3 class="anchored" data-anchor-id="hrs-aki-diagnosis-details">HRS-AKI Diagnosis Details</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">149</td>
+<td style="text-align: left;"><code>hrs_aki_criteria</code></td>
+<td style="text-align: left;">Was ICA HRS-AKI criteria met? (Select all criteria that were met)</td>
+<td style="text-align: left;">checkbox</td>
+<td style="text-align: left;">1 = Cirrhosis with ascites, 2 = Diagnosis of AKI according to ICA-AKI criteria, 3 = No response after 2 consecutive days of diuretic withdrawal and plasma volume expansion with albumin (1 g per kg of body weight), 4 = Absence of shock, 5 = No current or recent use of nephrotoxic drugs, 6 = Absence of proteinuria (&gt;500 mg/day), 7 = Absence of microhematuria (&gt;50 RBCs per HPF), 8 = Normal findings on kidney ultrasonography</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="volume-resuscitation-prior-to-terlipressin" class="level3">
+<h3 class="anchored" data-anchor-id="volume-resuscitation-prior-to-terlipressin">Volume Resuscitation Prior to Terlipressin</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">150</td>
+<td style="text-align: left;"><code>albumin_before_terli</code></td>
+<td style="text-align: left;">Was albumin given from time of admission to terlipressin initiation?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">151</td>
+<td style="text-align: left;"><code>totalalbumin_before_terli</code></td>
+<td style="text-align: left;">Total albumin given from time of admission to terlipressin initiation (grams)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">grams</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">152</td>
+<td style="text-align: left;"><code>albvolume_before_terli</code></td>
+<td style="text-align: left;">Total volume of albumin given from time of admission to terlipressin initiation (mL)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">153</td>
+<td style="text-align: left;"><code>crystalloid_before_terli</code></td>
+<td style="text-align: left;">Was crystalloids (normal saline, lactated ringers) given from time of admission to terlipressin initiation?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">155</td>
+<td style="text-align: left;"><code>saline_vol_before_terli</code></td>
+<td style="text-align: left;">Total volume of normal saline given from time of admission to terlipressin initiation (mL)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">156</td>
+<td style="text-align: left;"><code>lr_volume_before_terli</code></td>
+<td style="text-align: left;">Total volume of lactated ringers given from time of admission to terlipressin initiation (mL)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">158</td>
+<td style="text-align: left;"><code>prbc_trans_before_terli</code></td>
+<td style="text-align: left;">Was packed red blood cell transfusion given from time of admission to terlipressin initiation?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">159</td>
+<td style="text-align: left;"><code>prbc_qaunt_before_terli</code></td>
+<td style="text-align: left;">How many units of packed red blood cells given from time of admission to terlipressin initiation (units)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">units</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">160</td>
+<td style="text-align: left;"><code>totalvolume_before_terli</code></td>
+<td style="text-align: left;">Total volume (input) given from time of admission to terlipressin initiation (mL)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">161</td>
+<td style="text-align: left;"><code>total_uo_before_terli</code></td>
+<td style="text-align: left;">Total urine output (mL) from time of admission to terlipressin initiation</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mL</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="medications-prior-to-terlipressin" class="level3">
+<h3 class="anchored" data-anchor-id="medications-prior-to-terlipressin">Medications Prior to Terlipressin</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">162</td>
+<td style="text-align: left;"><code>nsbb_before_terli</code></td>
+<td style="text-align: left;">Non-selective beta blocker use from time of admission to terlipressin initiation?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Withdrawn, 2 = Tapered, 3 = Continued, 4 = Not applicable</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">164</td>
+<td style="text-align: left;"><code>mido_before_terli</code></td>
+<td style="text-align: left;">Midodrine given from time of admission to terlipressin initiation?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">166</td>
+<td style="text-align: left;"><code>days_first_mido_before_terli</code></td>
+<td style="text-align: left;">Days from admission to first dose of midodrine</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">168</td>
+<td style="text-align: left;"><code>days_total_mido_before_terli</code></td>
+<td style="text-align: left;">Days from admission to last dose of midodrine before terlipressin initiation</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">169</td>
+<td style="text-align: left;"><code>mido_maxdose_before_terli</code></td>
+<td style="text-align: left;">What was the maximum total dose of midodrine given in a day (mg)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">170</td>
+<td style="text-align: left;"><code>oct_before_terli</code></td>
+<td style="text-align: left;">Octreotide given from time of admission to terlipressin initiation?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">172</td>
+<td style="text-align: left;"><code>days_first_oct_before_terli</code></td>
+<td style="text-align: left;">Days from admission to first dose of octreotide</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">174</td>
+<td style="text-align: left;"><code>days_total_oct_before_terli</code></td>
+<td style="text-align: left;">Days from admission to last dose of octreotide before terlipressin initiation</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">175</td>
+<td style="text-align: left;"><code>oct_maxdose_before_terli</code></td>
+<td style="text-align: left;">What was the maximum total dose of octreotide given in a day (mcg)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mcg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">176</td>
+<td style="text-align: left;"><code>ne_before_terli</code></td>
+<td style="text-align: left;">Norepinephrine given from time of admission to terlipressin initiation?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">178</td>
+<td style="text-align: left;"><code>days_first_ne_before_terli</code></td>
+<td style="text-align: left;">Days from admission to first dose of norepinephrine</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">180</td>
+<td style="text-align: left;"><code>days_total_ne_before_terli</code></td>
+<td style="text-align: left;">Days from admission to last dose of norepinephrine before terlipressin initiation</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">181</td>
+<td style="text-align: left;"><code>norepi_dose_before_terli</code></td>
+<td style="text-align: left;">What was the maximum total dose of norepinephrine given in a day (mcg)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mcg</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="consultation-information" class="level3">
+<h3 class="anchored" data-anchor-id="consultation-information">Consultation Information</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">182</td>
+<td style="text-align: left;"><code>gihep_consult</code></td>
+<td style="text-align: left;">GI/Hep consultation</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">184</td>
+<td style="text-align: left;"><code>days_to_gihep_consult</code></td>
+<td style="text-align: left;">Days from admission to GI/Hep consultation</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">185</td>
+<td style="text-align: left;"><code>neph_consult</code></td>
+<td style="text-align: left;">Nephrology consultation</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">187</td>
+<td style="text-align: left;"><code>days_to_neph_consult</code></td>
+<td style="text-align: left;">Days from admission to nephrology consultation</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">188</td>
+<td style="text-align: left;"><code>pall_consult</code></td>
+<td style="text-align: left;">Palliative care consultation</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">190</td>
+<td style="text-align: left;"><code>days_to_pall_consult</code></td>
+<td style="text-align: left;">Days from admission to palliative care consultation</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">191</td>
+<td style="text-align: left;"><code>code_status</code></td>
+<td style="text-align: left;">Code status</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Full code, 2 = DNR</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="urinary-indices" class="level2">
+<h2 class="anchored" data-anchor-id="urinary-indices">Urinary Indices</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 27%">
+<col style="width: 32%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">192</td>
+<td style="text-align: left;"><code>ua_hrs</code></td>
+<td style="text-align: left;">Urine analysis available?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">195</td>
+<td style="text-align: left;"><code>ua_na_hrs</code></td>
+<td style="text-align: left;">Urine sodium available?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">198</td>
+<td style="text-align: left;"><code>ua_na_value_hrs</code></td>
+<td style="text-align: left;">Urine sodium (if &lt;10, enter 9; if &lt;20, enter 19)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">199</td>
+<td style="text-align: left;"><code>sna_value_day_of_ua_na_hrs</code></td>
+<td style="text-align: left;">Serum sodium on day of urine sodium (if not collected on day of, use closest value within 24 hours)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">200</td>
+<td style="text-align: left;"><code>ua_cr_hrs</code></td>
+<td style="text-align: left;">Urine creatinine available?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">203</td>
+<td style="text-align: left;"><code>ua_cr_value_hrs</code></td>
+<td style="text-align: left;">Urine creatinine</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">204</td>
+<td style="text-align: left;"><code>scr_value_day_of_ua_cr_hrs</code></td>
+<td style="text-align: left;">Serum creatinine on day of urine creatinine (if not collected on day of, use closest value within 24 hours)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">205</td>
+<td style="text-align: left;"><code>ua_urea_hrs</code></td>
+<td style="text-align: left;">Urine urea nitrogen available?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">208</td>
+<td style="text-align: left;"><code>ua_urea_value_hrs</code></td>
+<td style="text-align: left;">Urine urea nitrogen</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">210</td>
+<td style="text-align: left;"><code>fena_hrs</code></td>
+<td style="text-align: left;">FeNa (%)</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">211</td>
+<td style="text-align: left;"><code>feurea_hrs</code></td>
+<td style="text-align: left;">FEUrea (%)</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">212</td>
+<td style="text-align: left;"><code>ungal_hrs</code></td>
+<td style="text-align: left;">Urine NGAL available?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">215</td>
+<td style="text-align: left;"><code>ungal_value_hrs</code></td>
+<td style="text-align: left;">Urine NGAL</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">ng/mL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">216</td>
+<td style="text-align: left;"><code>ua_rbc_hrs</code></td>
+<td style="text-align: left;">Number of urine rbcs per high power field on urine analysis</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">per HPF</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">217</td>
+<td style="text-align: left;"><code>uaprotein_hrs</code></td>
+<td style="text-align: left;">Amount of protein in urine with spot check or 24-hour urine collection (spot check: mg protein/g Cr, or total mg for 24hr collection)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">218</td>
+<td style="text-align: left;"><code>ua_granularcasts_hrs</code></td>
+<td style="text-align: left;">Presence of urine granular casts on urine analysis?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">219</td>
+<td style="text-align: left;"><code>ua_epi_cells_hrs</code></td>
+<td style="text-align: left;">Presence of urine tubular epithelial cells on urine analysis?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="treatment-days" class="level2">
+<h2 class="anchored" data-anchor-id="treatment-days">Terlipressin Treatment Days 0–13</h2>
+<p>Each treatment day (Day 0 through Day 13) contains identical fields. Variables are suffixed <code>_day0</code> through <code>_day13</code>. Below uses <code>N</code> as placeholder.</p>
+<section id="terlipressin-treatment" class="level3">
+<h3 class="anchored" data-anchor-id="terlipressin-treatment">Terlipressin Treatment</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 27%">
+<col style="width: 13%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable Pattern</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>terli_date_dayN</code></td>
+<td style="text-align: left;">Day N date</td>
+<td style="text-align: left;">date</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>days_to_terli_initiation_dayN</code></td>
+<td style="text-align: left;">Days from admission to day N of terlipressin</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>discont_terli_dayN</code></td>
+<td style="text-align: left;">Was terlipressin discontinued?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>discont_reason_terli_dayN</code></td>
+<td style="text-align: left;">What was the reason of discontinuation?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Adverse Effect (abdominal pain, nausea, diarrhea, volume overload, bradycardia), 2 = Achieved HRS Reversal (serum creatinine &lt; or = 1.5 mg/dL), 3 = Worsening Kidney Function or Requiring Renal Replacement Therapy, 4 = Death, 5 = Transitioned to Hospice, 6 = Further Decompensation Requiring ICU care, 7 = Respiratory Failure, 8 = Ischemic Related Event (skin discoloration, cyanosis, organ ischemia), 9 = Other</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="adverse-events-shown-if-discontinued-due-to-adverse-effect" class="level3">
+<h3 class="anchored" data-anchor-id="adverse-events-shown-if-discontinued-due-to-adverse-effect">Adverse Events (shown if discontinued due to adverse effect)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 27%">
+<col style="width: 13%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable Pattern</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>terli_ae_abdpain_dayN</code></td>
+<td style="text-align: left;">Abdominal pain</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>terli_ae_nausea_dayN</code></td>
+<td style="text-align: left;">Nausea</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>terli_ae_diarrhea_dayN</code></td>
+<td style="text-align: left;">Diarrhea</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>terli_ae_volover_dayN</code></td>
+<td style="text-align: left;">Volume Overload</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>terli_ae_brady_dayN</code></td>
+<td style="text-align: left;">Bradycardia</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>terli_rrtmod_dayN</code></td>
+<td style="text-align: left;">What was the modality of renal replacement therapy</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = Not applicable, 1 = Intermittent, 2 = Continuous</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>terli_other_dayN</code></td>
+<td style="text-align: left;">If other, what was the reason</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dosing" class="level3">
+<h3 class="anchored" data-anchor-id="dosing">Dosing</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 27%">
+<col style="width: 13%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable Pattern</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>terli_route_day0</code></td>
+<td style="text-align: left;">Route of terlipressin initiation? (Day 0 only)</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Bolus, 2 = Continuous</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>initial_bolusdose_terli_day0</code></td>
+<td style="text-align: left;">If bolus, initial dose? (mg)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>initial_contdose_terli_day0</code></td>
+<td style="text-align: left;">If continuous, initial dose? (mg)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dosechange_terli_dayN</code></td>
+<td style="text-align: left;">If no, was dose adjusted?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>doseadjust_terli_dayN</code></td>
+<td style="text-align: left;">What was the new dose?</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>total_terli_dayN</code></td>
+<td style="text-align: left;">Total terlipressin dose for day N (mg)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="concomitant-medications-per-day" class="level3">
+<h3 class="anchored" data-anchor-id="concomitant-medications-per-day">Concomitant Medications (per day)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 24%">
+<col style="width: 12%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable Pattern</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values / Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>albumin_terli_dayN</code></td>
+<td style="text-align: left;">Albumin use?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>albumintotal_terli_dayN</code></td>
+<td style="text-align: left;">Total grams of albumin given for day N</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">grams</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>albuminvolume_terli_dayN</code></td>
+<td style="text-align: left;">Total volume of albumin for day N</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>mido_terli_dayN</code></td>
+<td style="text-align: left;">Midodrine use while on terlipressin?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>mido_dose_terli_dayN</code></td>
+<td style="text-align: left;">Total dose midodrine for day N</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>octreo_terli_dayN</code></td>
+<td style="text-align: left;">Octreotide use while on terlipressin?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>octreo_dose_terli_dayN</code></td>
+<td style="text-align: left;">Total octreotide dose for day N</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mcg</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>norepi_terli_dayN</code></td>
+<td style="text-align: left;">Norepinephrine use while on terlipressin?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>norepi_dose_terli_dayN</code></td>
+<td style="text-align: left;">Total norepinephrine dose for day N</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mcg</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vital-signs-per-day-4-time-points" class="level3">
+<h3 class="anchored" data-anchor-id="vital-signs-per-day-4-time-points">Vital Signs (per day, 4 time points)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 29%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable Pattern</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>tele_terli_dayN</code></td>
+<td style="text-align: left;">Continuous telemetry</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>pulseox_terli_dayN</code></td>
+<td style="text-align: left;">Continuous pulse oximetry</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>temp_terli_dayN</code></td>
+<td style="text-align: left;">Temperature (pick closest value to terlipressin initiation time)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">celsius</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>hr_terli_dayN</code></td>
+<td style="text-align: left;">Heart rate (pick closest value to terlipressin initiation time)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">BPM (40–130)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>rr_terli_dayN</code></td>
+<td style="text-align: left;">Respiratory rate (pick closest value to terlipressin initiation time)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>spo2_terli_dayN</code></td>
+<td style="text-align: left;">SpO2 (pick closest value to terlipressin initiation time)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>pao2_terli_dayN</code></td>
+<td style="text-align: left;">PaO2 (convert SpO2 closest to terlipressin initiation time to PaO2)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmHg</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>fio2_terli_dayN</code></td>
+<td style="text-align: left;">FiO2 (pick value associated with SpO2; room air is 0.21, add 0.04 for every L of nasal canula)</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>sbp_terli_dayN_time{0-3}</code></td>
+<td style="text-align: left;">Systolic BP (time 0 = midnight/0000, time 1 = 6AM/0600, time 2 = noon/1200, time 3 = 6PM/1800)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mmHg</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dbp_terli_dayN_time{0-3}</code></td>
+<td style="text-align: left;">Diastolic BP (pick value associated with systolic BP above)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mmHg</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>map_terli_dayN_time{0-3}</code></td>
+<td style="text-align: left;">MAP</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;">mmHg; <code>round((1/3)*SBP + (2/3)*DBP, 2)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>total_volume_in_terli_dayN</code></td>
+<td style="text-align: left;">Total volume input (mL)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>total_volume_out_terli_dayN</code></td>
+<td style="text-align: left;">Total urine output/24 hours (mL)</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mL</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="daily-labs-per-day" class="level3">
+<h3 class="anchored" data-anchor-id="daily-labs-per-day">Daily Labs (per day)</h3>
+<p><em>Pick the value closest on day N of terlipressin.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 29%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable Pattern</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>na_terli_dayN</code></td>
+<td style="text-align: left;">Serum sodium</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>k_terli_dayN</code></td>
+<td style="text-align: left;">Serum potassium</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>chloride_terli_dayN</code></td>
+<td style="text-align: left;">Serum chloride</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>bicarb_terli_dayN</code></td>
+<td style="text-align: left;">Serum bicarbonate</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>scr_terli_dayN</code></td>
+<td style="text-align: left;">Serum creatinine</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL (Required on Day 0)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cystatinc_terli_dayN</code></td>
+<td style="text-align: left;">Cystatin C</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/L</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>bun_terli_dayN</code></td>
+<td style="text-align: left;">BUN</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ast_terli_dayN</code></td>
+<td style="text-align: left;">AST</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">U/L</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>alt_terli_dayN</code></td>
+<td style="text-align: left;">ALT</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">U/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>bili_terli_dayN</code></td>
+<td style="text-align: left;">Total bilirubin</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>alb_terli_dayN</code></td>
+<td style="text-align: left;">Serum albumin</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">g/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>inr_terli_dayN</code></td>
+<td style="text-align: left;">INR</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>wbc_terli_dayN</code></td>
+<td style="text-align: left;">Total WBC</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">10^9/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>hgb_terli_dayN</code></td>
+<td style="text-align: left;">Hemoglobin</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">g/dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>plt_terli_dayN</code></td>
+<td style="text-align: left;">Platelet count</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">10^9/L</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="clinical-details-per-day" class="level3">
+<h3 class="anchored" data-anchor-id="clinical-details-per-day">Clinical Details (per day)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 39%">
+<col style="width: 27%">
+<col style="width: 13%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable Pattern</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>he_terli_dayN</code></td>
+<td style="text-align: left;">HE grade day N terlipressin</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = None, 1 = Grade 1, 2 = Grade 2, 3 = Grade 3, 4 = Grade 4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>location_terli_day0</code></td>
+<td style="text-align: left;">Location of terlipressin initiation? (Day 0 only)</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = General ward, 2 = Progressive care/step down unit, 3 = ICU</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>diuretic_terli_dayN</code></td>
+<td style="text-align: left;">Were diuretics used?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>para_terli_dayN</code></td>
+<td style="text-align: left;">Paracentesis?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>paravolume_terli_dayN</code></td>
+<td style="text-align: left;">If yes to paracentesis, how many liters?</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">liters</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>infection_terli_dayN</code></td>
+<td style="text-align: left;">Treatment of infection?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>typeinfection_terli_dayN</code></td>
+<td style="text-align: left;">If yes for treatment of infection, what kind of infection?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Pneumonia, 2 = UTI, 3 = Bacteremia, 4 = SBP, 5 = Other</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ltlisting_terli_day0</code></td>
+<td style="text-align: left;">Listed for Liver Transplantation? (Day 0 only)</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes, 2 = No, in evaluation</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="hrs-clinical-course" class="level2">
+<h2 class="anchored" data-anchor-id="hrs-clinical-course">HRS-AKI Clinical Course</h2>
+<section id="creatinine-post-terlipressin-discontinuation" class="level3">
+<h3 class="anchored" data-anchor-id="creatinine-post-terlipressin-discontinuation">Creatinine Post Terlipressin Discontinuation</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 35%">
+<col style="width: 17%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>scr_day1_post_terli</code></td>
+<td style="text-align: left;">Serum creatinine 1 day from terlipressin discontinuation</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>scr_day2_post_terli</code></td>
+<td style="text-align: left;">Serum creatinine 2 days from terlipressin discontinuation</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>scr_day3_post_terli</code></td>
+<td style="text-align: left;">Serum creatinine 3 days from terlipressin discontinuation</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>scr_day4_post_terli</code> – <code>scr_day14_post_terli</code></td>
+<td style="text-align: left;">Serum creatinine 4–14 days from terlipressin discontinuation</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hrs-aki-reversal-and-hrs-recovery" class="level3">
+<h3 class="anchored" data-anchor-id="hrs-aki-reversal-and-hrs-recovery">HRS-AKI Reversal and HRS Recovery</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1531</td>
+<td style="text-align: left;"><code>hrsreversal</code></td>
+<td style="text-align: left;">HRS reversal? Definition: serum creatinine &lt; 1.5 mg/dL</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1534</td>
+<td style="text-align: left;"><code>hrsrecovery</code></td>
+<td style="text-align: left;">HRS response during hospitalization?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No response, 1 = Partial (decrease in AKI stage but Scr &gt;0.3 mg/dL above baseline), 2 = Complete (serum creatinine &lt; 0.3 mg/dL of baseline)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="recurrent-aki" class="level3">
+<h3 class="anchored" data-anchor-id="recurrent-aki">Recurrent AKI</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1537</td>
+<td style="text-align: left;"><code>recurrentaki</code></td>
+<td style="text-align: left;">Recurrent AKI during hospitalization after HRS recovery? (ADQI definition: meeting AKI criteria &gt;0.3 mg/dL increase in serum creatinine within 48 hours or &gt;1.5x increase within 7 days, after a minimum of 48 hours from HRS recovery)</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1543</td>
+<td style="text-align: left;"><code>retreatment_terli</code></td>
+<td style="text-align: left;">Retreated with terlipressin?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nadir-and-peak-serum-creatinine-during-hospitalization" class="level3">
+<h3 class="anchored" data-anchor-id="nadir-and-peak-serum-creatinine-during-hospitalization">Nadir and Peak Serum Creatinine During Hospitalization</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 27%">
+<col style="width: 32%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1547</td>
+<td style="text-align: left;"><code>nadirhospit_scr</code></td>
+<td style="text-align: left;">Nadir serum creatinine during hospitalization</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1550</td>
+<td style="text-align: left;"><code>peakhospit_scr</code></td>
+<td style="text-align: left;">Peak serum creatinine during hospitalization</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="renal-replacement-therapy" class="level3">
+<h3 class="anchored" data-anchor-id="renal-replacement-therapy">Renal Replacement Therapy</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1553</td>
+<td style="text-align: left;"><code>rrt</code></td>
+<td style="text-align: left;">Renal replacement therapy?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes, 2 = Need for RRT, but not a candidate</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1554</td>
+<td style="text-align: left;"><code>rrt_modality</code></td>
+<td style="text-align: left;">What was the modality of renal replacement therapy?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Intermittent, 2 = Continuous</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1555</td>
+<td style="text-align: left;"><code>rrt_continuous</code></td>
+<td style="text-align: left;">Was renal replacement therapy continuous?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="hospitalization" class="level2">
+<h2 class="anchored" data-anchor-id="hospitalization">Hospitalization Course</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 25%">
+<col style="width: 30%">
+<col style="width: 15%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">–</td>
+<td style="text-align: left;"><code>lt_during_hospital</code></td>
+<td style="text-align: left;">Liver transplant during hospitalization?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">–</td>
+<td style="text-align: left;"><code>slkt_during_hospital</code></td>
+<td style="text-align: left;">Simultaneous liver-kidney transplant during hospitalization?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">–</td>
+<td style="text-align: left;"><code>days_to_lt</code></td>
+<td style="text-align: left;">Days from admission to liver transplant</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">–</td>
+<td style="text-align: left;"><code>hd_discharge</code></td>
+<td style="text-align: left;">Hemodialysis at time of discharge?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">–</td>
+<td style="text-align: left;"><code>disposition</code></td>
+<td style="text-align: left;">Discharge disposition</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">1 = Home, 2 = Skilled Nursing Facility, 3 = Rehabilitation, 4 = Other facility, 5 = Death</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">–</td>
+<td style="text-align: left;"><code>days_to_discharge</code></td>
+<td style="text-align: left;">Days from admission to discharge</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">–</td>
+<td style="text-align: left;"><code>lt_eval</code></td>
+<td style="text-align: left;">Liver transplant evaluation status</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">–</td>
+<td style="text-align: left;"><code>lteval_listingstatus</code></td>
+<td style="text-align: left;">Liver transplant listing status</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="followup" class="level2">
+<h2 class="anchored" data-anchor-id="followup">Follow-Up</h2>
+<section id="day-follow-up" class="level3">
+<h3 class="anchored" data-anchor-id="day-follow-up">90-Day Follow-Up</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 33%">
+<col style="width: 16%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>dc_death_90days</code></td>
+<td style="text-align: left;">Death within 90 days of discharge?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Yes, 2 = Lost to follow-up</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dc_days_to_death</code></td>
+<td style="text-align: left;">Days from discharge to death</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>dc_days_lastencounter</code></td>
+<td style="text-align: left;">Days from discharge to last encounter</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>days_to_lost_to_followup</code></td>
+<td style="text-align: left;">Days from discharge to lost to follow-up</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>dc_lt_90days</code></td>
+<td style="text-align: left;">Liver transplant within 90 days of discharge?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;">0 = No, 1 = Liver transplant, 2 = Simultaneous liver-kidney transplant</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dc_hd_status</code></td>
+<td style="text-align: left;">Hemodialysis status at follow-up</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>dc_terli_use</code></td>
+<td style="text-align: left;">Terlipressin re-use after discharge?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dc_aki_recurrence</code></td>
+<td style="text-align: left;">AKI recurrence after discharge?</td>
+<td style="text-align: left;">binary</td>
+<td style="text-align: left;">1 = Yes, 0 = No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>dc_aki_recurrence_eitology</code></td>
+<td style="text-align: left;">Etiology of AKI recurrence</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="follow-up-lab-values" class="level3">
+<h3 class="anchored" data-anchor-id="follow-up-lab-values">Follow-Up Lab Values</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 35%">
+<col style="width: 17%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>dc_scr30_value</code></td>
+<td style="text-align: left;">Serum creatinine at 30 days post-discharge</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dc_scr60_value</code></td>
+<td style="text-align: left;">Serum creatinine at 60 days post-discharge</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>dc_scr90_value</code></td>
+<td style="text-align: left;">Serum creatinine at 90 days post-discharge</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dc_albumin</code></td>
+<td style="text-align: left;">Albumin at follow-up</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">g/dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>dc_inr</code></td>
+<td style="text-align: left;">INR at follow-up</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dc_scr</code></td>
+<td style="text-align: left;">Serum creatinine at follow-up</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>dc_sna</code></td>
+<td style="text-align: left;">Serum sodium at follow-up</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mmol/L</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dc_tbili</code></td>
+<td style="text-align: left;">Total bilirubin at follow-up</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="year-follow-up" class="level3">
+<h3 class="anchored" data-anchor-id="year-follow-up">1-Year Follow-Up</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 33%">
+<col style="width: 16%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Field Label</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>vital_status_1yr</code></td>
+<td style="text-align: left;">Vital status at 1 year</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>hd_status_1yr</code></td>
+<td style="text-align: left;">Hemodialysis status at 1 year</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>scr_value_1yr</code></td>
+<td style="text-align: left;">Serum creatinine at 1 year</td>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">mg/dL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>lt_status_1yr</code></td>
+<td style="text-align: left;">Liver transplant status at 1 year</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>lt_type_1yr</code></td>
+<td style="text-align: left;">Liver transplant type at 1 year</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>days_to_lt_1yr</code></td>
+<td style="text-align: left;">Days from discharge to liver transplant</td>
+<td style="text-align: left;">calculated</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>tips_1yr</code></td>
+<td style="text-align: left;">TIPS within 1 year?</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tips_1yr_indication</code></td>
+<td style="text-align: left;">Indication for TIPS</td>
+<td style="text-align: left;">categorical</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/Tianqi-Ouyang\.github\.io\/Terli-Prognostic-Score\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
