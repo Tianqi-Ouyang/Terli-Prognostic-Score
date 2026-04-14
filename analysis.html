@@ -159,7 +159,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#notes-on-original-code" id="toc-notes-on-original-code" class="nav-link active" data-scroll-target="#notes-on-original-code">Notes on Original Code</a></li>
+  <li><a href="#missing-data-strategy" id="toc-missing-data-strategy" class="nav-link active" data-scroll-target="#missing-data-strategy">Missing Data Strategy</a></li>
+  <li><a href="#notes-on-original-code" id="toc-notes-on-original-code" class="nav-link" data-scroll-target="#notes-on-original-code">Notes on Original Code</a></li>
   <li><a href="#error-fixed-applied" id="toc-error-fixed-applied" class="nav-link" data-scroll-target="#error-fixed-applied">Error Fixed Applied</a></li>
   <li><a href="#clif-c-score-function" id="toc-clif-c-score-function" class="nav-link" data-scroll-target="#clif-c-score-function">CLIF-C Score Function</a></li>
   <li><a href="#project-specific-derived-variables" id="toc-project-specific-derived-variables" class="nav-link" data-scroll-target="#project-specific-derived-variables">Project-Specific Derived Variables</a></li>
@@ -223,6 +224,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="missing-data-strategy" class="level1">
+<h1>Missing Data Strategy</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 35%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What was done</th>
+<th>Variables affected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. MAP zeros → NA</td>
+<td>Treat <code>0</code> values as missing before summarizing</td>
+<td><code>map_terli_day0_time0</code>, <code>time1</code>, <code>time2</code>, <code>time3</code></td>
+</tr>
+<tr class="even">
+<td>2. MAP summary</td>
+<td>Median of the 4 day-0 readings (ignoring NAs)</td>
+<td>creates <code>map_terli_day0</code></td>
+</tr>
+<tr class="odd">
+<td>3. Median imputation of day-0 labs</td>
+<td><code>ifelse(is.na(x), median(x, na.rm=TRUE), x)</code></td>
+<td><code>bili_terli_day0</code>, <code>scr_terli_day0</code>, <code>he_terli_day0</code>, <code>alb_terli_day0</code>, <code>inr_terli_day0</code>, <code>map_terli_day0_time0</code>, <code>norepi_terli_day0</code>, <code>fio2_terli_day0</code>, <code>spo2_terli_day0</code>, <code>age</code>, <code>wbc_terli_day0</code></td>
+</tr>
+<tr class="even">
+<td>4. Median imputation of discharge labs</td>
+<td>Same approach</td>
+<td><code>dc_scr</code>, <code>dc_tbili</code>, <code>dc_inr</code>, <code>dc_sna</code>, <code>dc_albumin</code></td>
+</tr>
+<tr class="odd">
+<td>5. Creatinine capping (MELD)</td>
+<td>Cap SCr to [1, 4] before log-transform</td>
+<td><code>creatinine_adj_day0</code>, <code>dc_creatinine_adj</code></td>
+</tr>
+<tr class="even">
+<td>6. MELD-Na gating</td>
+<td>Set <code>MELD-Na = NA</code> when <code>MELD ≤ 11</code></td>
+<td><code>day0_meld_na</code>, <code>dc_meld_na</code></td>
+</tr>
+</tbody>
+</table>
+<p>Single-value median imputation performed separately per variable. No multiple imputation (MICE); no fallback-to-admit-value imputation (that block was commented out in the original). The most impactful imputation was day-0 INR at ~20% missing — the rest were under 7%.</p>
+</section>
 <section id="notes-on-original-code" class="level1">
 <h1>Notes on Original Code</h1>
 <table class="caption-top table">
@@ -744,7 +795,7 @@ Total computation time : 0.06  secs.</code></pre>
 <pre><code>$p_values_AUC
                    t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.3223720 0.5270008 0.8360576 0.5061147 0.6910524
-Adjusted     0.7128753 0.9217912 0.9992737 0.9076800 0.9865349
+Adjusted     0.7128785 0.9217912 0.9992737 0.9076798 0.9865353
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -767,7 +818,7 @@ $Cor
 <pre><code>$p_values_AUC
                    t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.8086865 0.2422969 0.2350830 0.4523079 0.2530835
-Adjusted     0.9987538 0.6026475 0.5897957 0.8754992 0.6213996
+Adjusted     0.9987538 0.6026450 0.5897998 0.8754981 0.6214019
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -790,7 +841,7 @@ $Cor
 <pre><code>$p_values_AUC
                     t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.08871838 0.7354856 0.8008251 0.8570522 0.6563882
-Adjusted     0.25801428 0.9923449 0.9978827 0.9995580 0.9765282
+Adjusted     0.25805592 0.9923456 0.9978828 0.9995580 0.9765284
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
