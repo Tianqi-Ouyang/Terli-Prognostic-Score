@@ -159,7 +159,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#error-fixed-applied" id="toc-error-fixed-applied" class="nav-link active" data-scroll-target="#error-fixed-applied">Error Fixed Applied</a></li>
+  <li><a href="#notes-on-original-code" id="toc-notes-on-original-code" class="nav-link active" data-scroll-target="#notes-on-original-code">Notes on Original Code</a></li>
+  <li><a href="#error-fixed-applied" id="toc-error-fixed-applied" class="nav-link" data-scroll-target="#error-fixed-applied">Error Fixed Applied</a></li>
   <li><a href="#clif-c-score-function" id="toc-clif-c-score-function" class="nav-link" data-scroll-target="#clif-c-score-function">CLIF-C Score Function</a></li>
   <li><a href="#project-specific-derived-variables" id="toc-project-specific-derived-variables" class="nav-link" data-scroll-target="#project-specific-derived-variables">Project-Specific Derived Variables</a></li>
   <li><a href="#cox-proportional-hazards-90-day-mortality" id="toc-cox-proportional-hazards-90-day-mortality" class="nav-link" data-scroll-target="#cox-proportional-hazards-90-day-mortality">Cox Proportional Hazards — 90-Day Mortality</a>
@@ -222,6 +223,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="notes-on-original-code" class="level1">
+<h1>Notes on Original Code</h1>
+<p><strong>Which script is newest?</strong> <code>old/code/Xing new.Rmd</code> (Jan 28, 2025) supersedes <code>old/code/Code.Rmd</code> (Jan 26, 2025). Current Table 1 and results are based on <code>Xing new.Rmd</code>.</p>
+<p><strong>CLIF-C variable mismatch in original code.</strong> In <code>Xing new.Rmd</code>, the day-0 CLIF-C is stored as <code>clif_c_score_day0</code>, but the Cox models, timeROC analyses, and logistic regression sections reference <code>clif_c_score_new</code> — a variable not defined in that script. <code>clif_c_score_new</code> actually comes from the parent shared pipeline (it is <code>clif_c_score</code> with NAs median-imputed, using a single MAP reading rather than the median of 4). <strong>Fixed in this analysis:</strong> all models now reference <code>clif_c_score_day0</code> (see row 3 of the Error table below).</p>
+<p><strong>Commented-out MELD imputation block.</strong> Lines 297-319 of <code>Xing new.Rmd</code> contain a commented-out fallback-then-median imputation strategy: replace missing day-0 labs with admission labs (<code>scr_terli_day0</code> ← <code>admit_creatinine_adj</code>, etc.), then median-impute the remainder, then also median-impute the resulting MELD scores themselves. This block is <strong>intentionally disabled</strong> in the original script. In the current analysis, day-0 labs used for MELD (<code>bili_terli_day0</code>, <code>scr_terli_day0</code>, <code>inr_terli_day0</code>, <code>alb_terli_day0</code>) ARE median-imputed directly before score calculation, but <strong><code>na_terli_day0</code> is not in the imputation list</strong> — patients missing sodium at day 0 will have NA MELD-Na and MELD 3.0. This matches the original script’s behavior.</p>
+</section>
 <section id="error-fixed-applied" class="level1">
 <h1>Error Fixed Applied</h1>
 <table class="caption-top table">
@@ -714,7 +721,7 @@ Total computation time : 0.06  secs.</code></pre>
 <pre><code>$p_values_AUC
                    t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.3223720 0.5270008 0.8360576 0.5061147 0.6910524
-Adjusted     0.7128752 0.9217918 0.9992737 0.9076811 0.9865351
+Adjusted     0.7128677 0.9217928 0.9992737 0.9076796 0.9865346
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -737,7 +744,7 @@ $Cor
 <pre><code>$p_values_AUC
                    t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.8086865 0.2422969 0.2350830 0.4523079 0.2530835
-Adjusted     0.9987538 0.6026466 0.5897993 0.8754986 0.6214085
+Adjusted     0.9987538 0.6026458 0.5897993 0.8754991 0.6214019
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -760,7 +767,7 @@ $Cor
 <pre><code>$p_values_AUC
                     t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.08871838 0.7354856 0.8008251 0.8570522 0.6563882
-Adjusted     0.25802939 0.9923455 0.9978827 0.9995579 0.9765282
+Adjusted     0.25798821 0.9923454 0.9978827 0.9995580 0.9765283
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
