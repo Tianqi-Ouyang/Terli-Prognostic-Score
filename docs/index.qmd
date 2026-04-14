@@ -1,0 +1,32 @@
+---
+title: "Xing — Prognostic Scoring in HRS-AKI"
+---
+
+## Project Summary
+
+This sub-project of the HARMONY Terlipressin Registry evaluates the discriminative ability of prognostic scoring systems in patients with hepatorenal syndrome-acute kidney injury (HRS-AKI) treated with terlipressin.
+
+### Scores Compared
+
+- **MELD** (Model for End-Stage Liver Disease)
+- **MELD-Na** (MELD with sodium correction)
+- **MELD 3.0** (updated MELD incorporating albumin and sex)
+- **CLIF-C** (Chronic Liver Failure Consortium score)
+
+### Outcomes
+
+- **Primary:** 90-day mortality from terlipressin initiation
+- **Secondary:** HRS treatment response (`hrs_responders_cat_2`)
+
+### Methods
+
+- Cox proportional hazards models for each score
+- Time-dependent ROC curves (timeROC) at days 7, 15, 30, 60, 89
+- Logistic regression ROC for HRS response prediction
+- Pairwise AUC comparisons (DeLong test and timeROC::compare)
+
+### Key Design Decisions
+
+- Survival time is anchored at **terlipressin initiation (day 0)**, not hospital admission
+- Scores recalculated from **day-0 labs** (not admission labs)
+- Missing labs handled via **median imputation** before score calculation

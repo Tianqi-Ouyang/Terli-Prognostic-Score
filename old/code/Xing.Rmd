@@ -1,0 +1,88 @@
+---
+title: "Xing"
+output: html_document
+date: "2025-08-19"
+---
+
+```{r,include=FALSE}
+library(tidyverse)
+library(tableone)
+library(writexl)
+library(gtsummary)
+library(survival)
+library(ggplot2)
+library(readxl)
+library(ggpubr)
+library(splines)
+library(xlsx)
+library(lattice)
+library(mice)
+library(DescTools)
+library(survminer)
+library(finalfit)
+library(tidycmprsk)
+library(ggsurvfit) 
+library(sqldf)
+library(table1)
+library(cobalt)
+
+library(MatchIt)
+
+
+
+
+
+terlipressin <- read_xlsx("/Users/to909/Desktop/Terlipressin/final_master_0508.xlsx")
+```
+
+```{r}
+all_vars <- c(
+  "transfer_aki",
+  "transfer_aki_days_toadmit",
+  "days_admit_to_aki",
+  
+  # admit vars
+  "scr_admit",
+  "tbili_admit",
+  "inr_admit",
+  "sodium_admit",
+  "albumin_admit",
+  
+  # AKI vars
+  "scr_aki",
+  "tbili_aki",
+  "inr_aki",
+  "sodium_aki",
+  "albumin_aki",
+  
+  # Terli vars
+  "scr_terli_day0",
+  "bili_terli_day0",
+  "inr_terli_day0",
+  "na_terli_day0",
+  "alb_terli_day0",
+  
+  # Outcomes
+  "dc_death_90days"
+)
+
+cat_vars <- c("transfer_aki","dc_death_90days")
+num_vars <- setdiff(all_vars,cat_vars)
+
+terli_selected <- terlipressin %>% select(var_names)
+```
+
+
+
+# Table 1 subgroup
+```{r}
+
+#create table one for expourse response#
+T1_subgroup <- CreateTableOne(vars = all_vars,includeNA = F,addOverall = TRUE,data = terli_selected, factorVars = cat_vars)
+#print table one 
+T1_subgroup_csv <- print(T1_subgroup, nonnormal=num_vars,showAllLevels = F,missing = T,quote = FALSE, noSpaces = TRUE, printToggle = FALSE)
+#save s
+write.csv(T1_subgroup_csv, file = "/Users/to909/Desktop/Terlipressin projects/Xing/Table1.csv")
+
+
+```

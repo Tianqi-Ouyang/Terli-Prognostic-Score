@@ -1,0 +1,640 @@
+---
+title: "Xing"
+output: html_document
+date: "`r Sys.Date()`"
+---
+```{r,echo=FALSE,warning=FALSE, message=FALSE,include=FALSE}
+library(tidyverse)
+library(tableone)
+library(writexl)
+library(gtsummary)
+library(survival)
+library(ggplot2)
+library(readxl)
+library(ggpubr)
+library(splines)
+library(xlsx)
+library(lattice)
+library(mice)
+library(DescTools)
+library(survminer)
+library(finalfit)
+library(tidycmprsk)
+library(ggsurvfit) 
+library(sqldf)
+library(table1)
+library(cobalt)
+
+library(MatchIt)
+
+library(pROC)
+
+
+
+final_master <- read_xlsx("/Users/to909/Desktop/Terlipressin/final_master_0508.xlsx")
+
+
+for (col in names(final_master)) {
+  # Suppress warnings like "NAs introduced by coercion"
+  converted <- suppressWarnings(as.numeric(final_master[[col]]))
+  
+  # If at least one value successfully converted (not NA), keep it
+  if (any(!is.na(converted))) {
+    final_master[[col]] <- converted
+  }
+}
+```
+
+```{r}
+
+
+
+
+calculate_clif_c_score <- function(tb_admit, peak_creatinine, he_grade_admission, inr_admit, map, pressor, fio2_admission, spo2_admission, age_admission, wbc_admit) {
+  
+  clif_score <- 0
+  
+  # TB Admit Score
+  clif_score <- clif_score + case_when(
+    is.na(tb_admit) ~ 0,
+    tb_admit < 6 ~ 1,
+    tb_admit >= 6 & tb_admit < 12 ~ 2,
+    tb_admit >= 12 ~ 3,
+    TRUE ~ 0
+  )
+  
+  # Peak Creatinine Score
+  clif_score <- clif_score + case_when(
+    is.na(peak_creatinine) ~ 0,
+    peak_creatinine < 2 ~ 1,
+    peak_creatinine >= 2 & peak_creatinine < 3.5 ~ 2,
+    peak_creatinine >= 3.5 ~ 3,
+    TRUE ~ 0
+  )
+  
+  # HE Grade Admission Score
+  clif_score <- clif_score + case_when(
+    is.na(he_grade_admission) ~ 0,
+    he_grade_admission == 1 ~ 1,
+    he_grade_admission %in% c(2, 3) ~ 2,
+    he_grade_admission %in% c(4, 5) ~ 3,
+    TRUE ~ 0
+  )
+  
+  # INR Admit Score
+  clif_score <- clif_score + case_when(
+    is.na(inr_admit) ~ 0,
+    inr_admit < 2 ~ 1,
+    inr_admit >= 2 & inr_admit < 2.5 ~ 2,
+    inr_admit >= 2.5 ~ 3,
+    TRUE ~ 0
+  )
+  
+  # MAP and Pressor Score
+  clif_score <- clif_score + case_when(
+    is.na(map) ~ 0,
+    map >= 70 & pressor != 1 ~ 1,
+    map < 70 & pressor != 1 ~ 2,
+    !is.na(map) & pressor == 1 ~ 3,
+    TRUE ~ 0
+  )
+  
+  # FIO2 and SPO2 Admission Score
+  if (!is.na(fio2_admission)) {
+    ratio <- spo2_admission / fio2_admission
+    clif_score <- clif_score + case_when(
+      ratio > 357 ~ 1,
+      ratio > 214 & ratio <= 357 ~ 2,
+      ratio <= 214 ~ 3,
+      TRUE ~ 0
+    )
+  }
+  
+  # Calculate CLIF-C Score
+  CLIF_C_Score <- 10 * (0.33 * clif_score + 0.04 * age_admission + 0.63 * log(wbc_admit) - 2)
+  
+  return(CLIF_C_Score)
+}
+
+
+
+```
+
+
+
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+# test <- final_master %>% select(disposition,days_to_discharge,dc_death_90days, days_to_terli_initiation_day0,dc_days_to_death,dc_days_lastencounter,days_to_lost_to_followup) 
+# 
+#                                                                                                              
+#                                                                                                              
+#                                                                                                              
+# test <- test %>% mutate(dc_days_to_death=ifelse(disposition == 5,0,dc_days_to_death)) %>% 
+#   mutate(
+#     death_hosp = if_else(disposition == 5, 1L, 0L)
+#   ) %>%
+#   select(
+#     days_to_terli_initiation_day0,
+#     days_to_discharge,
+#     disposition,
+#     death_hosp,
+#     dc_days_to_death,
+#     dc_death_90days,
+#     days_to_lost_to_followup,
+#     dc_days_lastencounter
+#   ) %>%
+#   mutate(
+#     days_to_dc_init            = days_to_discharge - days_to_terli_initiation_day0,
+#     days_to_los_init           = days_to_lost_to_followup + days_to_discharge - days_to_terli_initiation_day0,
+#     days_to_lastencounter_init = dc_days_lastencounter + days_to_discharge - days_to_terli_initiation_day0,
+#     days_to_after_dc_death_init= dc_days_to_death + days_to_discharge - days_to_terli_initiation_day0,
+# 
+#     death_status_check = case_when(
+#       disposition == 5 | dc_death_90days == 2 ~ 1,
+#       TRUE ~ 0),
+# 
+#     time_to_death_check = case_when(
+#       disposition == 5   ~ days_to_dc_init,
+#       dc_death_90days == 2 ~ days_to_los_init,
+#       dc_death_90days == 1  ~ days_to_after_dc_death_init,
+#       dc_death_90days == 0  & is.na(days_to_lastencounter_init) ~ days_to_los_init,
+#       dc_death_90days == 0 & !is.na(days_to_lastencounter_init) ~ days_to_lastencounter_init,
+#       
+#       TRUE ~ NA_real_
+#     ),
+#     death_status_90days_init=ifelse(time_to_death_check<=90 & death_status_check==1,1,0),
+#     time_to_death_90days_init=ifelse(time_to_death_check<=90 ,time_to_death_check, 90)
+#   )
+# 
+
+
+
+
+
+
+# dc_death_90days: errors 
+
+# %>% mutate(across(all_of("dc_tbili"), ~ as.numeric(parse_number(.x)))) %>% 
+#     
+#   mutate(across(
+#     c(dc_tbili, dc_scr, dc_inr, dc_sna, day0_meld, dc_albumin), 
+#     ~ as.numeric(parse_number(as.character(.x)))
+#   )) 
+
+
+
+
+final_master <-  final_master %>% mutate(across(all_of(c("bili_terli_day0", "scr_terli_day0", "he_terli_day0",
+                    "inr_terli_day0", "map_terli_day0_time0", "norepi_terli_day0",
+                    "fio2_terli_day0", "spo2_terli_day0", "age", "wbc_terli_day0")),
+                ~ ifelse(is.na(.), median(., na.rm = TRUE), .)))
+
+
+
+final_master <- final_master %>%
+  mutate(across(
+    c(map_terli_day0_time0, map_terli_day0_time1, map_terli_day0_time2, map_terli_day0_time3),
+    ~ na_if(as.numeric(.), 0)
+  ))
+
+
+map_terli_day0 <- final_master %>%
+  group_by(subjectid) %>%
+  summarise(
+    map_terli_day0 = median(
+      c(map_terli_day0_time0, map_terli_day0_time1, map_terli_day0_time2, map_terli_day0_time3),
+      na.rm = TRUE
+    ),
+    .groups = "drop"
+  )
+
+
+
+final_master <- final_master %>% merge(map_terli_day0,by="subjectid",all.x = T)
+
+
+final_master <- final_master %>% mutate(
+clif_c_score= mapply(calculate_clif_c_score, bili_terli_day0, scr_terli_day0, he_terli_day0, 
+                       inr_terli_day0, map_terli_day0, norepi_terli_day0, fio2_terli_day0, spo2_terli_day0,
+                       age, wbc_terli_day0))
+
+
+
+final_master <- final_master %>% 
+  mutate(dc_days_to_death=ifelse(disposition == 5,0,dc_days_to_death)) %>% 
+  mutate(
+    death_hosp = if_else(disposition == 5, 1L, 0L)
+  ) %>%
+  mutate(
+    days_to_dc_init            = days_to_discharge - days_to_terli_initiation_day0,
+    days_to_los_init           = days_to_lost_to_followup + days_to_discharge - days_to_terli_initiation_day0,
+    days_to_lastencounter_init = dc_days_lastencounter + days_to_discharge - days_to_terli_initiation_day0,
+    days_to_after_dc_death_init= dc_days_to_death + days_to_discharge - days_to_terli_initiation_day0,
+
+    death_status_check = case_when(
+      disposition == 5 | dc_death_90days == 1 ~ 1,
+      
+      TRUE ~ 0),
+
+    time_to_death_check = case_when(
+      disposition == 5   ~ days_to_dc_init,
+      dc_death_90days == 2 ~ days_to_los_init,
+      dc_death_90days == 1  ~ days_to_after_dc_death_init,
+      dc_death_90days == 0  & is.na(days_to_lastencounter_init) ~ days_to_los_init,
+      dc_death_90days == 0 & !is.na(days_to_lastencounter_init) ~ days_to_lastencounter_init,
+      
+      TRUE ~ NA_real_),
+    death_status_90days_init=ifelse(time_to_death_check<=90 & death_status_check==1,1,0),
+    time_to_death_90days_init=ifelse(time_to_death_check<=90 ,time_to_death_check, 90)) %>% 
+  
+  
+  mutate(
+    # ---- Median impute each needed column ----
+    dc_scr     = ifelse(is.na(dc_scr),     median(dc_scr,     na.rm = TRUE), dc_scr),
+    dc_tbili   = ifelse(is.na(dc_tbili),   median(dc_tbili,   na.rm = TRUE), dc_tbili),
+    dc_inr     = ifelse(is.na(dc_inr),     median(dc_inr,     na.rm = TRUE), dc_inr),
+    dc_sna     = ifelse(is.na(dc_sna),     median(dc_sna,     na.rm = TRUE), dc_sna),
+    # day0_meld  = ifelse(is.na(day0_meld),  median(day0_meld,  na.rm = TRUE), day0_meld),
+    dc_albumin = ifelse(is.na(dc_albumin), median(dc_albumin, na.rm = TRUE), dc_albumin)) %>% 
+  
+  
+ mutate(
+    dc_meld = round(9.57 * log(dc_scr) + 3.78 * log(dc_tbili) + 11.20 * log(dc_inr) + 6.43),
+    dc_meld_na = round(dc_meld + 1.32 * (137 - pmin(pmax(dc_sna, 125), 137)) - (0.033 * dc_meld * (137 - pmin(pmax(dc_sna, 125), 137)))),
+    dc_meld_na = ifelse(dc_meld_na > 11, dc_meld_na, NA), # MELDNa applied only if MELD > 11
+    sex_male=as.numeric(sex_male),
+    female_factor = if_else(sex_male == 0, 1.33, 0), # Assuming a column 'sex' is present, adjust accordingly
+    dc_meld_3 = round(
+      female_factor +
+      4.56 * log(dc_tbili) +
+      0.82 * (137 - dc_sna) -
+      0.24 * (137 - dc_sna) * log(dc_tbili) +
+      9.09 * log(dc_inr) +
+      11.14 * log(dc_scr) +
+      1.85 * (3.5 - dc_albumin) -
+      1.83 * (3.5 - dc_albumin) * log(dc_scr) +
+      6
+    )
+     ) %>%   mutate(day0_meld = round(9.57 * log(scr_terli_day0) + 3.78 * log(bili_terli_day0) + 11.20 * log(inr_terli_day0) + 6.43),
+    day0_meld_na = round(day0_meld + 1.32 * (137 - pmin(pmax(na_terli_day0, 125), 137)) - (0.033 * day0_meld * (137 - pmin(pmax(na_terli_day0, 125), 137)))),
+    day0_meld_na = ifelse(day0_meld_na > 11, day0_meld_na, NA), # MELDNa applied only if MELD > 11
+    sex_male=as.numeric(sex_male),
+    female_factor = if_else(sex_male == 0, 1.33, 0), # Assuming a column 'sex' is present, adjust accordingly
+    day0_meld_3 = round(
+      female_factor +
+      4.56 * log(bili_terli_day0) +
+      0.82 * (137 - na_terli_day0) -
+      0.24 * (137 - na_terli_day0) * log(bili_terli_day0) +
+      9.09 * log(inr_terli_day0) +
+      11.14 * log(scr_terli_day0) +
+      1.85 * (3.5 - alb_terli_day0) -
+      1.83 * (3.5 - alb_terli_day0) * log(scr_terli_day0) +
+      6
+    ))
+
+
+
+
+# %>% mutate(scr_terli_day0=ifelse(is.na(scr_terli_day0),admit_creatinine_adj,scr_terli_day0),
+#                   bili_terli_day0=ifelse(is.na(bili_terli_day0),tbili_admit,bili_terli_day0),
+#                   inr_terli_day0=ifelse(is.na(inr_terli_day0),inr_admit,inr_terli_day0),
+#                   na_terli_day0=ifelse(is.na(na_terli_day0),sodium_admit,na_terli_day0),
+#                   alb_terli_day0=ifelse(is.na(alb_terli_day0),albumin_admit,alb_terli_day0)
+#                   ) %>%
+#   
+#   
+#   mutate(
+#     # ---- Median impute each needed column ----
+#     scr_terli_day0     = ifelse(is.na(scr_terli_day0),     median(scr_terli_day0,     na.rm = TRUE), scr_terli_day0),
+#     bili_terli_day0   = ifelse(is.na(bili_terli_day0),   median(bili_terli_day0,   na.rm = TRUE), bili_terli_day0),
+#     inr_terli_day0     = ifelse(is.na(inr_terli_day0),     median(inr_terli_day0,     na.rm = TRUE), inr_terli_day0),
+#     na_terli_day0     = ifelse(is.na(na_terli_day0),     median(na_terli_day0,     na.rm = TRUE), na_terli_day0),
+#     day0_meld  = ifelse(is.na(day0_meld),  median(day0_meld,  na.rm = TRUE), day0_meld),
+#     alb_terli_day0 = ifelse(is.na(alb_terli_day0), median(alb_terli_day0, na.rm = TRUE), alb_terli_day0)) %>% 
+      
+
+
+
+# day0_meld =ifelse(is.na(day0_meld),median(day0_meld,na.rm = T),day0_meld),
+#     day0_meld_na =ifelse(is.na(day0_meld_na),median(day0_meld_na,na.rm = T),day0_meld_na),
+#     day0_meld_3 =ifelse(is.na(day0_meld_3),median(admit_meld_3,na.rm = T),day0_meld_3)
+#     
+# check <- final_master %>% select(days_to_terli_initiation_day0,days_to_discharge,days_to_lost_to_followup,dc_days_lastencounter,dc_days_to_death,dc_death_90days,days_to_los_init,days_to_lastencounter_init,days_to_after_dc_death_init,days_to_dc_init,disposition,death_status_check,time_to_death_check)
+```
+
+
+# cox day0_meld_3
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+# ---------- Cox models (one per score) ----------
+cox_day0_meld_3   <- coxph(Surv(time_to_death_90days_init, death_status_90days_init) ~ day0_meld_3,    data = final_master, x = TRUE)
+
+summary(cox_day0_meld_3)
+```
+
+
+# cox day0_meld
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+# ---------- Cox models (one per score) ----------
+cox_day0_meld   <- coxph(Surv(time_to_death_90days_init, death_status_90days_init) ~ day0_meld,    data = final_master, x = TRUE)
+
+summary(cox_day0_meld)
+```
+
+# cox day0_meld_na
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+# ---------- Cox models (one per score) ----------
+cox_day0_meld_na   <- coxph(Surv(time_to_death_90days_init, death_status_90days_init) ~ day0_meld_na,    data = final_master, x = TRUE)
+
+summary(cox_day0_meld_na)
+```
+
+
+# cox clif_c_score_new
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+# ---------- Cox models (one per score) ----------
+cox_clif_c_score_new   <- coxph(Surv(time_to_death_90days_init, death_status_90days_init) ~ clif_c_score_new,    data = final_master, x = TRUE)
+
+summary(cox_clif_c_score_new)
+```
+
+
+
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+all_vars <- c(
+  "age",
+  "sex_male",
+  "race",
+  "BMI",
+  "cirrhosis_etiology",
+  "he_previous_comp",
+  "ascites_previous_comp",
+  "refascites_previous_comp",
+  "sbp_previous_comp",
+  "nonsbp_previous_comp",
+  "phtn_bleed_previous_comp",
+  "hcc_previous_comp",
+  "tips_previous_comp",
+  "aki_previous_90days",
+  "mido_preadmission",
+  "oct_before_terli",
+  "pressors_aki",
+  "admit_meld_3",
+  "day0_meld_na",
+  "day0_meld",
+  "day0_meld_3",
+  "baseline_scr_new",
+  "baseline_scr",
+  "tbili_admit",
+  "inr_admit",
+  "sodium_admit",
+  "albumin_admit",
+  "aclf_grade",
+  "clif_c_score",
+  "icu_admit",
+  "criteria_1",
+  "criteria_2",
+  "criteria_3",
+  "criteria_4",
+  "alb_terli_discont_day",
+  "terli_route_day0",
+  "Discont_Day", 
+  "albumin_before_terli", 
+  "totalalbumin_before_terli", 
+   
+  "hrs_responders", 
+  "hrs_responders_cat_2",
+  "map_day0",
+  "rrt_90days",
+  "lt_90days",
+  "death_status_90days_init"
+
+  
+  
+)
+
+num_vars <- c(
+  "age",
+  "BMI",
+  "admit_meld_3",
+  "day0_meld_na",
+  "day0_meld",
+  "day0_meld_3",
+  "baseline_scr_new",
+  "baseline_scr",
+  "tbili_admit",
+  "inr_admit",
+  "sodium_admit",
+  "albumin_admit",
+  "aclf_grade",
+  "clif_c_score",
+  "alb_terli_discont_day",
+  "totalalbumin_before_terli","albvolume_before_terli",
+  "Discont_Day",
+  "map_day0"
+)
+
+cat_vars <- setdiff(all_vars,num_vars)
+
+
+```
+# Table 1 function
+```{r,echo=FALSE,warning=FALSE, message=FALSE,echo=FALSE,warning=FALSE,message=FALSE}
+
+create_table_one <- function(all_vars,
+                             cat_vars,
+                             data,
+                             strata,
+                             output) {
+  
+  numerical_vars=setdiff(all_vars,cat_vars)
+  
+  # 1) Generate the table
+  T1_after <- tableone::CreateTableOne(
+    vars       = all_vars,
+    strata     = strata,        # variable to stratify by
+    data       = data,
+    factorVars = cat_vars,      # specify which variables are factors
+    addOverall = TRUE,
+    includeNA  = FALSE
+  )
+
+  # 2) Print TableOne object and convert to data frame
+  T1_after_print <-
+    print(
+      T1_after,
+      showAllLevels = T,
+      nonnormal = numerical_vars,
+      missing       = TRUE,
+      quote         = FALSE,
+      noSpaces      = TRUE,
+      printToggle   = FALSE
+    )
+  
+
+  # 3) Write the table as CSV
+  write.csv(T1_after_print, file = output)
+}
+
+
+
+```
+
+
+# Table 1
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+
+
+create_table_one(
+  all_vars = all_vars,
+  cat_vars = cat_vars,
+  data     = final_master,
+  strata   = "death_status_90days_init",
+  output   = '/Users/to909/Desktop/Terlipressin projects/Xing/Table_1_death_status_90days_init_01_26_2026.csv'
+)
+
+
+
+```
+
+
+# ROC_day0_meld_3
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+
+library(timeROC)
+
+ROC_day0_meld_3<- timeROC(T=final_master$time_to_death_90days_init, delta=final_master$death_status_90days_init,marker=final_master$day0_meld_3, cause=1,weighting="marginal", times=c(7,15,30,60,89), iid=TRUE)
+
+ROC_day0_meld_3
+```
+
+
+# ROC_day0_meld
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+
+library(timeROC)
+
+ROC_day0_meld<- timeROC(T=final_master$time_to_death_90days_init, delta=final_master$death_status_90days_init,marker=final_master$day0_meld, cause=1,weighting="marginal", times=c(7,15,30,60,89), iid=TRUE)
+
+ROC_day0_meld
+```
+
+# ROC_day0_meld_na
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+
+library(timeROC)
+
+ROC_day0_meld_na<- timeROC(T=final_master$time_to_death_90days_init, delta=final_master$death_status_90days_init,marker=final_master$day0_meld_na, cause=1,weighting="marginal", times=c(7,15,30,60,89), iid=TRUE)
+
+ROC_day0_meld_na
+```
+
+# ROC_clif_c_score_new
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+
+library(timeROC)
+
+ROC_clif_c_score_new<- timeROC(T=final_master$time_to_death_90days_init, delta=final_master$death_status_90days_init,marker=final_master$clif_c_score_new, cause=1,weighting="marginal", times= c(7,15,30,60,89), iid=TRUE)
+
+ROC_clif_c_score_new
+```
+
+
+# ROC_day0_meld,ROC_day0_meld_3
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+library(pROC)
+
+compare(ROC_day0_meld,ROC_day0_meld_3,adjusted=TRUE)
+
+```
+
+
+# ROC_day0_meld_na,ROC_day0_meld_3
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+
+
+compare(ROC_day0_meld_na,ROC_day0_meld_3,adjusted=TRUE)
+
+```
+
+# ROC_clif_c_score_new,ROC_day0_meld_3
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+library(pROC)
+
+compare(ROC_clif_c_score_new,ROC_day0_meld_3,adjusted=TRUE)
+
+```
+
+
+
+# Table
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+final_master_death <- final_master %>% filter(death_status_90days_init==1)
+
+final_master_death <- final_master_death %>% mutate(meld_3_cat3=case_when(day0_meld_3 <25 ~ "<25", day0_meld_3 >=25 & day0_meld_3 <= 35 ~ "25 - 35", day0_meld_3 > 35 ~ ">35"),meld_na_cat3=case_when(day0_meld_na <25 ~ "<25", day0_meld_na >=25 & day0_meld_na <= 35 ~ "25 - 35", day0_meld_na > 35 ~ ">35")
+                                                     )
+gmodels::CrossTable(
+  final_master_death$meld_3_cat3,
+  final_master_death$meld_na_cat3,
+  prop.r = FALSE,
+  prop.c = FALSE,
+  prop.t = FALSE,
+  prop.chisq = FALSE,
+  chisq = FALSE
+)
+```
+
+
+# logistic regression 
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+# Fit Model meld
+model_day0_meld <- glm(hrs_responders_cat_2 ~ day0_meld, data = final_master, family = "binomial")
+
+# Fit meld_na
+model_day0_meld_na <- glm(hrs_responders_cat_2 ~ day0_meld_na, data = final_master, family = "binomial")
+
+# Fit Model clif_c_score_new
+model_clif_c_score_new <- glm(hrs_responders_cat_2 ~ clif_c_score_new, data = final_master, family = "binomial")
+
+# Fit Model meld_3
+model_day0_meld_3 <- glm(hrs_responders_cat_2 ~ day0_meld_3, data = final_master, family = "binomial")
+
+final_master$pred_day0_meld    <- predict(model_day0_meld, type = "response")
+final_master$pred_day0_meld_na <- predict(model_day0_meld_na, type = "response")
+final_master$pred_day0_meld_3        <- predict(model_day0_meld_3, type = "response")
+final_master$pred_clif         <- predict(model_clif_c_score_new, type = "response")
+
+roc_meld_3 <- roc(final_master$hrs_responders_cat_2, final_master$pred_day0_meld_3, ci=TRUE,direction = "<")
+roc_meld <- roc(final_master$hrs_responders_cat_2, final_master$pred_day0_meld, ci=TRUE,direction = "<")
+roc_na   <- roc(final_master$hrs_responders_cat_2, final_master$pred_day0_meld_na, ci=TRUE,direction = "<")
+roc_clif <- roc(final_master$hrs_responders_cat_2, final_master$pred_clif, ci=TRUE,direction = "<")
+
+
+```
+
+# roc_meld 
+```{r}
+roc(final_master$hrs_responders_cat_2, final_master$pred_day0_meld, ci=TRUE,direction = "<")
+roc.test(roc_meld, roc_meld_3, method = "delong")
+
+```
+
+# roc_meld_3
+```{r}
+roc(final_master$hrs_responders_cat_2, final_master$pred_day0_meld_3, ci=TRUE,direction = "<")
+
+```
+
+# roc_na
+
+```{r}
+roc(final_master$hrs_responders_cat_2, final_master$pred_day0_meld_na, ci=TRUE,direction = "<")
+roc.test(roc_na, roc_meld_3, method = "delong")
+```
+
+# roc_clif
+
+```{r}
+roc(final_master$hrs_responders_cat_2, final_master$pred_clif, ci=TRUE,direction = "<")
+roc.test(roc_clif, roc_meld_3, method = "delong")
+```
+
+
