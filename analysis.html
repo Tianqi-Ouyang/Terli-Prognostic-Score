@@ -160,7 +160,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#missing-data-strategy" id="toc-missing-data-strategy" class="nav-link active" data-scroll-target="#missing-data-strategy">Missing Data Strategy</a></li>
-  <li><a href="#notes-on-original-code" id="toc-notes-on-original-code" class="nav-link" data-scroll-target="#notes-on-original-code">Notes on Original Code</a></li>
   <li><a href="#error-fixed-applied" id="toc-error-fixed-applied" class="nav-link" data-scroll-target="#error-fixed-applied">Error Fixed Applied</a></li>
   <li><a href="#clif-c-score-function" id="toc-clif-c-score-function" class="nav-link" data-scroll-target="#clif-c-score-function">CLIF-C Score Function</a></li>
   <li><a href="#project-specific-derived-variables" id="toc-project-specific-derived-variables" class="nav-link" data-scroll-target="#project-specific-derived-variables">Project-Specific Derived Variables</a></li>
@@ -272,36 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Single-value median imputation performed separately per variable. No multiple imputation (MICE); no fallback-to-admit-value imputation (that block was commented out in the original). The most impactful imputation was day-0 INR at ~20% missing — the rest were under 7%.</p>
-</section>
-<section id="notes-on-original-code" class="level1">
-<h1>Notes on Original Code</h1>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 55%">
-<col style="width: 44%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Question</th>
-<th>Answer</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Is <code>Xing new.Rmd</code> the newest version, and <code>Code.Rmd</code> the older one?</strong></td>
-<td>Yes. <code>Xing new.Rmd</code> was last modified <strong>Jan 28, 2025</strong>; <code>Code.Rmd</code> was last modified <strong>Jan 26, 2025</strong>. Current Table 1 and RPubs results were generated from <code>Xing new.Rmd</code>.</td>
-</tr>
-<tr class="even">
-<td><strong>Why do the Cox / timeROC / logistic regression sections reference <code>clif_c_score_new</code> instead of the day-0 <code>clif_c_score_day0</code>?</strong></td>
-<td><code>clif_c_score_new</code> is not defined in <code>Xing new.Rmd</code> — it comes from the parent shared pipeline (it’s <code>clif_c_score</code> with NAs median-imputed, using a single MAP reading rather than the median of 4). The original script silently used the pipeline’s version instead of the locally-computed <code>clif_c_score_day0</code>. <strong>Fixed in this analysis:</strong> all models now reference <code>clif_c_score_day0</code> (see row 3 of the Error table below).</td>
-</tr>
-<tr class="odd">
-<td><strong>Is the commented-out MELD median imputation block (lines 297-319) intentional?</strong></td>
-<td>Yes, intentionally disabled. That block was a fallback-then-median strategy: replace missing day-0 labs with admission labs (<code>scr_terli_day0</code> ← <code>admit_creatinine_adj</code>, etc.), then median-impute the remainder, then also median-impute the resulting MELD scores themselves. In the current analysis, day-0 labs used for MELD (<code>bili_terli_day0</code>, <code>scr_terli_day0</code>, <code>inr_terli_day0</code>, <code>alb_terli_day0</code>) ARE median-imputed before score calculation, but <strong><code>na_terli_day0</code> is not in the imputation list</strong> — patients missing day-0 sodium will have NA MELD-Na and MELD 3.0. This matches the original script’s behavior.</td>
-</tr>
-</tbody>
-</table>
+<p>Single-value median imputation performed separately per variable. No multiple imputation (MICE); no fallback-to-admit-value imputation (that block was commented out in the original).</p>
 </section>
 <section id="error-fixed-applied" class="level1">
 <h1>Error Fixed Applied</h1>
@@ -795,7 +765,7 @@ Total computation time : 0.06  secs.</code></pre>
 <pre><code>$p_values_AUC
                    t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.3223720 0.5270008 0.8360576 0.5061147 0.6910524
-Adjusted     0.7128785 0.9217912 0.9992737 0.9076798 0.9865353
+Adjusted     0.7128665 0.9217920 0.9992737 0.9076802 0.9865346
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -816,9 +786,9 @@ $Cor
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$p_values_AUC
-                   t=7      t=15      t=30      t=60      t=89
-Non-adjusted 0.8086865 0.2422969 0.2350830 0.4523079 0.2530835
-Adjusted     0.9987538 0.6026450 0.5897998 0.8754981 0.6214019
+                   t=7      t=15     t=30      t=60      t=89
+Non-adjusted 0.8086865 0.2422969 0.235083 0.4523079 0.2530835
+Adjusted     0.9987538 0.6026509 0.589784 0.8754981 0.6213956
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -841,7 +811,7 @@ $Cor
 <pre><code>$p_values_AUC
                     t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.08871838 0.7354856 0.8008251 0.8570522 0.6563882
-Adjusted     0.25805592 0.9923456 0.9978828 0.9995580 0.9765284
+Adjusted     0.25800823 0.9923455 0.9978827 0.9995580 0.9765285
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
