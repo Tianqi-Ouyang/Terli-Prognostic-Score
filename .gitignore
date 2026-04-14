@@ -3,4 +3,6 @@
 .Rproj.user/
 *.Rproj
 docs/.quarto/
+docs/_site/
+docs/analysis_files/
 *.csv
