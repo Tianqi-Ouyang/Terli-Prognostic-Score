@@ -15,6 +15,7 @@ execute:
 | `dc_meld` / `dc_meld_3` also use raw `dc_scr` without capping to [1, 4] — same MELD capping rule applies to discharge scores | Added `dc_creatinine_adj = case_when(dc_scr < 1 ~ 1, dc_scr >= 4 ~ 4, TRUE ~ dc_scr)` and used it in `dc_meld` and `dc_meld_3` formulas |
 | `clif_c_score_day0` computed but never used — all models referenced `clif_c_score_new` (from shared pipeline, uses single MAP reading) instead of `clif_c_score_day0` (uses median of 4 MAP readings) | Replaced `clif_c_score_new` with `clif_c_score_day0` in all Cox, timeROC, and logistic regression models |
 | `albvolume_before_terli` in `num_vars` but not in `all_vars` — silently excluded from Table 1 | Added `albvolume_before_terli` to `all_vars` |
+| Table 1 still referenced `clif_c_score` (from shared pipeline, single MAP reading) instead of `clif_c_score_day0` (median of 4 MAP readings) used in all models | Replaced `clif_c_score` with `clif_c_score_day0` in both `all_vars` and `num_vars` for Table 1 |
 
 ```{r setup}
 #| include: false
@@ -372,7 +373,7 @@ all_vars <- c(
   "mido_preadmission", "oct_before_terli", "pressors_aki",
   "admit_meld_3", "day0_meld_na", "day0_meld", "day0_meld_3",
   "baseline_scr_new", "baseline_scr", "tbili_admit", "inr_admit",
-  "sodium_admit", "albumin_admit", "aclf_grade", "clif_c_score",
+  "sodium_admit", "albumin_admit", "aclf_grade", "clif_c_score_day0",
   "icu_admit", "criteria_1", "criteria_2", "criteria_3", "criteria_4",
   "alb_terli_discont_day", "terli_route_day0", "Discont_Day",
   "albumin_before_terli", "totalalbumin_before_terli",
@@ -384,7 +385,7 @@ all_vars <- c(
 num_vars <- c(
   "age", "BMI", "admit_meld_3", "day0_meld_na", "day0_meld", "day0_meld_3",
   "baseline_scr_new", "baseline_scr", "tbili_admit", "inr_admit",
-  "sodium_admit", "albumin_admit", "aclf_grade", "clif_c_score",
+  "sodium_admit", "albumin_admit", "aclf_grade", "clif_c_score_day0",
   "alb_terli_discont_day", "totalalbumin_before_terli",
   "albvolume_before_terli", "Discont_Day", "map_day0"
 )
@@ -464,3 +465,235 @@ roc.test(roc_na, roc_meld_3, method = "delong")
 roc_clif
 roc.test(roc_clif, roc_meld_3, method = "delong")
 ```
+
+
+# Logistic Regression ROC — RRT During Hospitalization
+
+Outcome: `rrt_2` (0 = no RRT, 1 = RRT during hospitalization). Each day-0 score is entered as a single predictor in a logistic regression; predicted probabilities are then evaluated by ROC. Each score is compared with MELD 3.0 via DeLong's test.
+
+```{r logistic-roc-rrt}
+#| code-fold: true
+#| code-summary: "Show RRT logistic models + ROC"
+
+model_rrt_day0_meld         <- glm(rrt_2 ~ day0_meld,         data = master, family = "binomial")
+model_rrt_day0_meld_na      <- glm(rrt_2 ~ day0_meld_na,      data = master, family = "binomial")
+model_rrt_day0_meld_3       <- glm(rrt_2 ~ day0_meld_3,       data = master, family = "binomial")
+model_rrt_clif_c_score_day0 <- glm(rrt_2 ~ clif_c_score_day0, data = master, family = "binomial")
+
+master$pred_rrt_day0_meld    <- predict(model_rrt_day0_meld,         type = "response")
+master$pred_rrt_day0_meld_na <- predict(model_rrt_day0_meld_na,      type = "response")
+master$pred_rrt_day0_meld_3  <- predict(model_rrt_day0_meld_3,       type = "response")
+master$pred_rrt_clif         <- predict(model_rrt_clif_c_score_day0, type = "response")
+
+roc_rrt_meld_3 <- roc(master$rrt_2, master$pred_rrt_day0_meld_3,  ci = TRUE, direction = "<")
+roc_rrt_meld   <- roc(master$rrt_2, master$pred_rrt_day0_meld,    ci = TRUE, direction = "<")
+roc_rrt_na     <- roc(master$rrt_2, master$pred_rrt_day0_meld_na, ci = TRUE, direction = "<")
+roc_rrt_clif   <- roc(master$rrt_2, master$pred_rrt_clif,         ci = TRUE, direction = "<")
+```
+
+## MELD 3.0
+```{r rrt-delong-meld3}
+#| code-fold: true
+roc_rrt_meld_3
+```
+
+## MELD vs MELD 3.0
+```{r rrt-delong-meld}
+#| code-fold: true
+roc_rrt_meld
+roc.test(roc_rrt_meld, roc_rrt_meld_3, method = "delong")
+```
+
+## MELD-Na vs MELD 3.0
+```{r rrt-delong-meldna}
+#| code-fold: true
+roc_rrt_na
+roc.test(roc_rrt_na, roc_rrt_meld_3, method = "delong")
+```
+
+## CLIF-C vs MELD 3.0
+```{r rrt-delong-clif}
+#| code-fold: true
+roc_rrt_clif
+roc.test(roc_rrt_clif, roc_rrt_meld_3, method = "delong")
+```
+
+
+# Cross-Tabulation — MELD 3.0 vs MELD-Na Categories (Survivors, 90-Day)
+
+Same cells as the decedent cross-tab above, but restricted to patients alive at 90 days (`death_status_90days_init == 0`). Rows = MELD 3.0 strata; columns = MELD-Na strata. Each cell is a count of survivors falling into that pair of categories.
+
+```{r cross-tab-nonevent}
+#| code-fold: true
+master_alive <- master %>%
+  filter(death_status_90days_init == 0) %>%
+  mutate(
+    meld_3_cat3  = case_when(day0_meld_3  < 25 ~ "<25",
+                             day0_meld_3  >= 25 & day0_meld_3  <= 35 ~ "25 - 35",
+                             day0_meld_3  > 35 ~ ">35"),
+    meld_na_cat3 = case_when(day0_meld_na < 25 ~ "<25",
+                             day0_meld_na >= 25 & day0_meld_na <= 35 ~ "25 - 35",
+                             day0_meld_na > 35 ~ ">35")
+  )
+
+gmodels::CrossTable(
+  master_alive$meld_3_cat3,
+  master_alive$meld_na_cat3,
+  prop.r = FALSE, prop.c = FALSE, prop.t = FALSE, prop.chisq = FALSE, chisq = FALSE
+)
+```
+
+
+# Categorical NRI — MELD 3.0 vs MELD-Na (3 strata: <25, 25–35, >35)
+
+Reclassification uses three identical strata for both scores (<25, 25–35, >35). Movement is defined as the change in stratum from MELD-Na (reference) to MELD 3.0 (new):
+
+- "up"   — MELD 3.0 places the patient in a higher stratum than MELD-Na
+- "down" — MELD 3.0 places the patient in a lower stratum than MELD-Na
+- "same" — identical stratum
+
+For events (death by 90 days) upward movement is favourable (patient correctly reclassified to higher risk); for non-events (alive at 90 days) downward movement is favourable. Variance follows the standard Pencina formulation assuming independence of event and non-event components.
+
+```{r categorical-nri}
+#| code-fold: true
+#| code-summary: "Show categorical NRI"
+
+master_nri <- master %>%
+  filter(
+    !is.na(death_status_90days_init),
+    !is.na(day0_meld_3),
+    !is.na(day0_meld_na)
+  ) %>%
+  mutate(
+    meld_3_cat3 = case_when(
+      day0_meld_3 < 25                     ~ 1,
+      day0_meld_3 >= 25 & day0_meld_3 <= 35 ~ 2,
+      day0_meld_3 > 35                     ~ 3
+    ),
+    meld_na_cat3 = case_when(
+      day0_meld_na < 25                      ~ 1,
+      day0_meld_na >= 25 & day0_meld_na <= 35 ~ 2,
+      day0_meld_na > 35                      ~ 3
+    ),
+    move = case_when(
+      meld_3_cat3 > meld_na_cat3 ~ "up",
+      meld_3_cat3 < meld_na_cat3 ~ "down",
+      TRUE                       ~ "same"
+    )
+  )
+
+# Events (90-day deaths)
+event_res <- master_nri %>%
+  filter(death_status_90days_init == 1) %>%
+  summarise(
+    n_event      = n(),
+    p_up_event   = mean(move == "up"),
+    p_down_event = mean(move == "down"),
+    nri_event    = p_up_event - p_down_event,
+    var_event    = (p_up_event + p_down_event - (p_up_event - p_down_event)^2) / n_event
+  )
+
+# Non-events (alive at 90 days)
+nonevent_res <- master_nri %>%
+  filter(death_status_90days_init == 0) %>%
+  summarise(
+    n_nonevent      = n(),
+    p_down_nonevent = mean(move == "down"),
+    p_up_nonevent   = mean(move == "up"),
+    nri_nonevent    = p_down_nonevent - p_up_nonevent,
+    var_nonevent    = (p_down_nonevent + p_up_nonevent - (p_down_nonevent - p_up_nonevent)^2) / n_nonevent
+  )
+
+nri_total <- event_res$nri_event + nonevent_res$nri_nonevent
+var_total <- event_res$var_event + nonevent_res$var_nonevent
+se_total  <- sqrt(var_total)
+
+ci_lower <- nri_total - 1.96 * se_total
+ci_upper <- nri_total + 1.96 * se_total
+z_value  <- nri_total / se_total
+p_value  <- 2 * pnorm(-abs(z_value))
+
+cat_nri_result <- list(
+  event_res    = event_res,
+  nonevent_res = nonevent_res,
+  nri_total    = nri_total,
+  se_total     = se_total,
+  ci_95        = c(ci_lower, ci_upper),
+  z_value      = z_value,
+  p_value      = p_value
+)
+
+cat_nri_result
+```
+
+**Interpretation.** `nri_event` is the net proportion of 90-day decedents who moved *upward* by one or more strata when switching from MELD-Na to MELD 3.0; `nri_nonevent` is the net proportion of survivors who moved *downward*. `nri_total` is their sum (range roughly −2 to +2). Positive values favour MELD 3.0. 95% CI and p-value assume large-sample normality of each component; small event counts in individual cells can make the Wald-type variance unstable — treat borderline p-values cautiously.
+
+
+# Continuous NRI — MELD 3.0 vs MELD-Na (raw-score comparison)
+
+**Nuance / caveat.** This implementation follows the user-specified formulation: movement is defined by the direction of difference between the two *raw scores* (`day0_meld_3` vs `day0_meld_na`), rather than between predicted probabilities from two logistic/Cox models (the classical Pencina continuous NRI). MELD 3.0 and MELD-Na are on *different scales* — MELD 3.0 adds a baseline intercept (+6), a female adjustment (+1.33), and explicit albumin and interaction terms, whereas MELD-Na layers a sodium penalty on top of the original MELD. Consequently, for a large fraction of patients the raw-score comparison will register as "up" purely because MELD 3.0 tends to produce a numerically larger score, independent of any true reclassification improvement. The resulting "event" NRI component is therefore likely to be close to the baseline proportion of patients with `day0_meld_3 > day0_meld_na`, and the "non-event" component its complement. Use this metric descriptively; do not interpret it as the Pencina continuous NRI.
+
+```{r continuous-nri}
+#| code-fold: true
+#| code-summary: "Show continuous NRI (raw-score)"
+
+master_cf <- master %>%
+  filter(
+    !is.na(death_status_90days_init),
+    !is.na(day0_meld_3),
+    !is.na(day0_meld_na)
+  ) %>%
+  mutate(
+    move = case_when(
+      day0_meld_3 > day0_meld_na ~ "up",
+      day0_meld_3 < day0_meld_na ~ "down",
+      TRUE                       ~ "same"
+    )
+  )
+
+event_res <- master_cf %>%
+  filter(death_status_90days_init == 1) %>%
+  summarise(
+    n_event      = n(),
+    p_up_event   = mean(move == "up"),
+    p_down_event = mean(move == "down"),
+    nri_event    = p_up_event - p_down_event,
+    var_event    = (p_up_event + p_down_event - (p_up_event - p_down_event)^2) / n_event
+  )
+
+nonevent_res <- master_cf %>%
+  filter(death_status_90days_init == 0) %>%
+  summarise(
+    n_nonevent      = n(),
+    p_down_nonevent = mean(move == "down"),
+    p_up_nonevent   = mean(move == "up"),
+    nri_nonevent    = p_down_nonevent - p_up_nonevent,
+    var_nonevent    = (p_down_nonevent + p_up_nonevent - (p_down_nonevent - p_up_nonevent)^2) / n_nonevent
+  )
+
+nri_total <- event_res$nri_event + nonevent_res$nri_nonevent
+var_total <- event_res$var_event + nonevent_res$var_nonevent
+se_total  <- sqrt(var_total)
+
+ci_lower <- nri_total - 1.96 * se_total
+ci_upper <- nri_total + 1.96 * se_total
+z_value  <- nri_total / se_total
+p_value  <- 2 * pnorm(-abs(z_value))
+
+cont_nri_result <- data.frame(
+  n_event      = event_res$n_event,
+  n_nonevent   = nonevent_res$n_nonevent,
+  nri_event    = event_res$nri_event,
+  nri_nonevent = nonevent_res$nri_nonevent,
+  nri_total    = nri_total,
+  se_total     = se_total,
+  ci_lower     = ci_lower,
+  ci_upper     = ci_upper,
+  z_value      = z_value,
+  p_value      = p_value
+)
+
+cont_nri_result
+```
+
+**Interpretation.** Any non-zero difference between the two raw scores counts as upward (favouring MELD 3.0) or downward movement; ties are ignored. Because of the scale offset discussed above, a large positive "event" NRI component here reflects the fact that MELD 3.0 scores are systematically higher than MELD-Na scores — not necessarily better risk ordering.
