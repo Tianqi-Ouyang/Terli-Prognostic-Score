@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-04-14">
+<meta name="dcterms.date" content="2026-04-24">
 
 <title>Xing — Prognostic Score Analysis – Terlipressin — Xing Prognostic Scores</title>
 <style>
@@ -159,8 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#missing-data-strategy" id="toc-missing-data-strategy" class="nav-link active" data-scroll-target="#missing-data-strategy">Missing Data Strategy</a></li>
-  <li><a href="#error-fixed-applied" id="toc-error-fixed-applied" class="nav-link" data-scroll-target="#error-fixed-applied">Error Fixed Applied</a></li>
+  <li><a href="#error-fixed-applied" id="toc-error-fixed-applied" class="nav-link active" data-scroll-target="#error-fixed-applied">Error Fixed Applied</a></li>
   <li><a href="#clif-c-score-function" id="toc-clif-c-score-function" class="nav-link" data-scroll-target="#clif-c-score-function">CLIF-C Score Function</a></li>
   <li><a href="#project-specific-derived-variables" id="toc-project-specific-derived-variables" class="nav-link" data-scroll-target="#project-specific-derived-variables">Project-Specific Derived Variables</a></li>
   <li><a href="#cox-proportional-hazards-90-day-mortality" id="toc-cox-proportional-hazards-90-day-mortality" class="nav-link" data-scroll-target="#cox-proportional-hazards-90-day-mortality">Cox Proportional Hazards — 90-Day Mortality</a>
@@ -192,6 +191,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#meld-na-vs-meld-3.0-1" id="toc-meld-na-vs-meld-3.0-1" class="nav-link" data-scroll-target="#meld-na-vs-meld-3.0-1">MELD-Na vs MELD 3.0</a></li>
   <li><a href="#clif-c-vs-meld-3.0-1" id="toc-clif-c-vs-meld-3.0-1" class="nav-link" data-scroll-target="#clif-c-vs-meld-3.0-1">CLIF-C vs MELD 3.0</a></li>
   </ul></li>
+  <li><a href="#logistic-regression-roc-rrt-during-hospitalization" id="toc-logistic-regression-roc-rrt-during-hospitalization" class="nav-link" data-scroll-target="#logistic-regression-roc-rrt-during-hospitalization">Logistic Regression ROC — RRT During Hospitalization</a>
+  <ul class="collapse">
+  <li><a href="#meld-3.0-1" id="toc-meld-3.0-1" class="nav-link" data-scroll-target="#meld-3.0-1">MELD 3.0</a></li>
+  <li><a href="#meld-vs-meld-3.0-2" id="toc-meld-vs-meld-3.0-2" class="nav-link" data-scroll-target="#meld-vs-meld-3.0-2">MELD vs MELD 3.0</a></li>
+  <li><a href="#meld-na-vs-meld-3.0-2" id="toc-meld-na-vs-meld-3.0-2" class="nav-link" data-scroll-target="#meld-na-vs-meld-3.0-2">MELD-Na vs MELD 3.0</a></li>
+  <li><a href="#clif-c-vs-meld-3.0-2" id="toc-clif-c-vs-meld-3.0-2" class="nav-link" data-scroll-target="#clif-c-vs-meld-3.0-2">CLIF-C vs MELD 3.0</a></li>
+  </ul></li>
+  <li><a href="#cross-tabulation-meld-3.0-vs-meld-na-categories-survivors-90-day" id="toc-cross-tabulation-meld-3.0-vs-meld-na-categories-survivors-90-day" class="nav-link" data-scroll-target="#cross-tabulation-meld-3.0-vs-meld-na-categories-survivors-90-day">Cross-Tabulation — MELD 3.0 vs MELD-Na Categories (Survivors, 90-Day)</a></li>
+  <li><a href="#categorical-nri-meld-3.0-vs-meld-na-3-strata-25-2535-35" id="toc-categorical-nri-meld-3.0-vs-meld-na-3-strata-25-2535-35" class="nav-link" data-scroll-target="#categorical-nri-meld-3.0-vs-meld-na-3-strata-25-2535-35">Categorical NRI — MELD 3.0 vs MELD-Na (3 strata: &lt;25, 25–35, &gt;35)</a></li>
+  <li><a href="#continuous-nri-meld-3.0-vs-meld-na-raw-score-comparison" id="toc-continuous-nri-meld-3.0-vs-meld-na-raw-score-comparison" class="nav-link" data-scroll-target="#continuous-nri-meld-3.0-vs-meld-na-raw-score-comparison">Continuous NRI — MELD 3.0 vs MELD-Na (raw-score comparison)</a></li>
   </ul>
 </nav>
     </div>
@@ -211,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 14, 2026</p>
+      <p class="date">April 24, 2026</p>
     </div>
   </div>
   
@@ -223,56 +232,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="missing-data-strategy" class="level1">
-<h1>Missing Data Strategy</h1>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 14%">
-<col style="width: 35%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Step</th>
-<th>What was done</th>
-<th>Variables affected</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1. MAP zeros → NA</td>
-<td>Treat <code>0</code> values as missing before summarizing</td>
-<td><code>map_terli_day0_time0</code>, <code>time1</code>, <code>time2</code>, <code>time3</code></td>
-</tr>
-<tr class="even">
-<td>2. MAP summary</td>
-<td>Median of the 4 day-0 readings (ignoring NAs)</td>
-<td>creates <code>map_terli_day0</code></td>
-</tr>
-<tr class="odd">
-<td>3. Median imputation of day-0 labs</td>
-<td><code>ifelse(is.na(x), median(x, na.rm=TRUE), x)</code></td>
-<td><code>bili_terli_day0</code>, <code>scr_terli_day0</code>, <code>he_terli_day0</code>, <code>alb_terli_day0</code>, <code>inr_terli_day0</code>, <code>map_terli_day0_time0</code>, <code>norepi_terli_day0</code>, <code>fio2_terli_day0</code>, <code>spo2_terli_day0</code>, <code>age</code>, <code>wbc_terli_day0</code></td>
-</tr>
-<tr class="even">
-<td>4. Median imputation of discharge labs</td>
-<td>Same approach</td>
-<td><code>dc_scr</code>, <code>dc_tbili</code>, <code>dc_inr</code>, <code>dc_sna</code>, <code>dc_albumin</code></td>
-</tr>
-<tr class="odd">
-<td>5. Creatinine capping (MELD)</td>
-<td>Cap SCr to [1, 4] before log-transform</td>
-<td><code>creatinine_adj_day0</code>, <code>dc_creatinine_adj</code></td>
-</tr>
-<tr class="even">
-<td>6. MELD-Na gating</td>
-<td>Set <code>MELD-Na = NA</code> when <code>MELD ≤ 11</code></td>
-<td><code>day0_meld_na</code>, <code>dc_meld_na</code></td>
-</tr>
-</tbody>
-</table>
-<p>Single-value median imputation performed separately per variable. No multiple imputation (MICE); no fallback-to-admit-value imputation (that block was commented out in the original).</p>
-</section>
 <section id="error-fixed-applied" class="level1">
 <h1>Error Fixed Applied</h1>
 <table class="caption-top table">
@@ -302,6 +261,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td><code>albvolume_before_terli</code> in <code>num_vars</code> but not in <code>all_vars</code> — silently excluded from Table 1</td>
 <td>Added <code>albvolume_before_terli</code> to <code>all_vars</code></td>
+</tr>
+<tr class="odd">
+<td>Table 1 still referenced <code>clif_c_score</code> (from shared pipeline, single MAP reading) instead of <code>clif_c_score_day0</code> (median of 4 MAP readings) used in all models</td>
+<td>Replaced <code>clif_c_score</code> with <code>clif_c_score_day0</code> in both <code>all_vars</code> and <code>num_vars</code> for Table 1</td>
 </tr>
 </tbody>
 </table>
@@ -747,7 +710,7 @@ t=89   102       119       22   65.46 3.65
 
 Method used for estimating IPCW:marginal 
 
-Total computation time : 0.06  secs.</code></pre>
+Total computation time : 0.07  secs.</code></pre>
 </div>
 </div>
 </section>
@@ -765,7 +728,7 @@ Total computation time : 0.06  secs.</code></pre>
 <pre><code>$p_values_AUC
                    t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.3223720 0.5270008 0.8360576 0.5061147 0.6910524
-Adjusted     0.7128665 0.9217920 0.9992737 0.9076802 0.9865346
+Adjusted     0.7128688 0.9217918 0.9992737 0.9076804 0.9865350
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -786,9 +749,9 @@ $Cor
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$p_values_AUC
-                   t=7      t=15     t=30      t=60      t=89
-Non-adjusted 0.8086865 0.2422969 0.235083 0.4523079 0.2530835
-Adjusted     0.9987538 0.6026509 0.589784 0.8754981 0.6213956
+                   t=7      t=15      t=30      t=60      t=89
+Non-adjusted 0.8086865 0.2422969 0.2350830 0.4523079 0.2530835
+Adjusted     0.9987538 0.6026444 0.5897926 0.8754996 0.6214022
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -811,7 +774,7 @@ $Cor
 <pre><code>$p_values_AUC
                     t=7      t=15      t=30      t=60      t=89
 Non-adjusted 0.08871838 0.7354856 0.8008251 0.8570522 0.6563882
-Adjusted     0.25800823 0.9923455 0.9978827 0.9995580 0.9765285
+Adjusted     0.25809954 0.9923454 0.9978827 0.9995579 0.9765276
 
 $Cor
           [,1]      [,2]      [,3]      [,4]      [,5]
@@ -837,7 +800,7 @@ $Cor
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mido_preadmission"</span>, <span class="st">"oct_before_terli"</span>, <span class="st">"pressors_aki"</span>,</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"admit_meld_3"</span>, <span class="st">"day0_meld_na"</span>, <span class="st">"day0_meld"</span>, <span class="st">"day0_meld_3"</span>,</span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"baseline_scr_new"</span>, <span class="st">"baseline_scr"</span>, <span class="st">"tbili_admit"</span>, <span class="st">"inr_admit"</span>,</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sodium_admit"</span>, <span class="st">"albumin_admit"</span>, <span class="st">"aclf_grade"</span>, <span class="st">"clif_c_score"</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sodium_admit"</span>, <span class="st">"albumin_admit"</span>, <span class="st">"aclf_grade"</span>, <span class="st">"clif_c_score_day0"</span>,</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"icu_admit"</span>, <span class="st">"criteria_1"</span>, <span class="st">"criteria_2"</span>, <span class="st">"criteria_3"</span>, <span class="st">"criteria_4"</span>,</span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"alb_terli_discont_day"</span>, <span class="st">"terli_route_day0"</span>, <span class="st">"Discont_Day"</span>,</span>
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"albumin_before_terli"</span>, <span class="st">"totalalbumin_before_terli"</span>,</span>
@@ -849,7 +812,7 @@ $Cor
 <span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>num_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"age"</span>, <span class="st">"BMI"</span>, <span class="st">"admit_meld_3"</span>, <span class="st">"day0_meld_na"</span>, <span class="st">"day0_meld"</span>, <span class="st">"day0_meld_3"</span>,</span>
 <span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"baseline_scr_new"</span>, <span class="st">"baseline_scr"</span>, <span class="st">"tbili_admit"</span>, <span class="st">"inr_admit"</span>,</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sodium_admit"</span>, <span class="st">"albumin_admit"</span>, <span class="st">"aclf_grade"</span>, <span class="st">"clif_c_score"</span>,</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"sodium_admit"</span>, <span class="st">"albumin_admit"</span>, <span class="st">"aclf_grade"</span>, <span class="st">"clif_c_score_day0"</span>,</span>
 <span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"alb_terli_discont_day"</span>, <span class="st">"totalalbumin_before_terli"</span>,</span>
 <span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"albvolume_before_terli"</span>, <span class="st">"Discont_Day"</span>, <span class="st">"map_day0"</span></span>
 <span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1524,161 +1487,7 @@ $Cor
 <td class="lastrow">&lt;0.001</td>
 </tr>
 <tr class="even">
-<td class="rowlabel firstrow">clif_c_score</td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-</tr>
-<tr class="odd">
-<td class="rowlabel">Median [Q1, Q3]</td>
-<td>39 [35, 45]</td>
-<td>44 [39, 51]</td>
-<td>41 [36, 48]</td>
-<td>&lt;0.001</td>
-</tr>
-<tr class="even">
-<td class="rowlabel lastrow">Missing</td>
-<td class="lastrow">5 (3.5%)</td>
-<td class="lastrow">4 (3.9%)</td>
-<td class="lastrow">9 (3.7%)</td>
-<td class="lastrow"></td>
-</tr>
-<tr class="odd">
-<td class="rowlabel firstrow">icu_admit</td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-</tr>
-<tr class="even">
-<td class="rowlabel">0</td>
-<td>81 (57.4%)</td>
-<td>33 (32.4%)</td>
-<td>114 (46.9%)</td>
-<td>&lt;0.001</td>
-</tr>
-<tr class="odd">
-<td class="rowlabel">1</td>
-<td>60 (42.6%)</td>
-<td>68 (66.7%)</td>
-<td>128 (52.7%)</td>
-<td></td>
-</tr>
-<tr class="even">
-<td class="rowlabel lastrow">Missing</td>
-<td class="lastrow">0 (0%)</td>
-<td class="lastrow">1 (1.0%)</td>
-<td class="lastrow">1 (0.4%)</td>
-<td class="lastrow"></td>
-</tr>
-<tr class="odd">
-<td class="rowlabel firstrow">criteria_1</td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-</tr>
-<tr class="even">
-<td class="rowlabel">0</td>
-<td>126 (89.4%)</td>
-<td>89 (87.3%)</td>
-<td>215 (88.5%)</td>
-<td>0.879</td>
-</tr>
-<tr class="odd">
-<td class="rowlabel lastrow">1</td>
-<td class="lastrow">15 (10.6%)</td>
-<td class="lastrow">13 (12.7%)</td>
-<td class="lastrow">28 (11.5%)</td>
-<td class="lastrow"></td>
-</tr>
-<tr class="even">
-<td class="rowlabel firstrow">criteria_2</td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-</tr>
-<tr class="odd">
-<td class="rowlabel">0</td>
-<td>89 (63.1%)</td>
-<td>45 (44.1%)</td>
-<td>134 (55.1%)</td>
-<td>0.0133</td>
-</tr>
-<tr class="even">
-<td class="rowlabel lastrow">1</td>
-<td class="lastrow">52 (36.9%)</td>
-<td class="lastrow">57 (55.9%)</td>
-<td class="lastrow">109 (44.9%)</td>
-<td class="lastrow"></td>
-</tr>
-<tr class="odd">
-<td class="rowlabel firstrow">criteria_3</td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-</tr>
-<tr class="even">
-<td class="rowlabel">0</td>
-<td>136 (96.5%)</td>
-<td>97 (95.1%)</td>
-<td>233 (95.9%)</td>
-<td>0.871</td>
-</tr>
-<tr class="odd">
-<td class="rowlabel lastrow">1</td>
-<td class="lastrow">5 (3.5%)</td>
-<td class="lastrow">5 (4.9%)</td>
-<td class="lastrow">10 (4.1%)</td>
-<td class="lastrow"></td>
-</tr>
-<tr class="even">
-<td class="rowlabel firstrow">criteria_4</td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-</tr>
-<tr class="odd">
-<td class="rowlabel">0</td>
-<td>137 (97.2%)</td>
-<td>93 (91.2%)</td>
-<td>230 (94.7%)</td>
-<td>0.123</td>
-</tr>
-<tr class="even">
-<td class="rowlabel lastrow">1</td>
-<td class="lastrow">4 (2.8%)</td>
-<td class="lastrow">9 (8.8%)</td>
-<td class="lastrow">13 (5.3%)</td>
-<td class="lastrow"></td>
-</tr>
-<tr class="odd">
-<td class="rowlabel firstrow">terli_route_day0</td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
-</tr>
-<tr class="even">
-<td class="rowlabel">1</td>
-<td>120 (85.1%)</td>
-<td>87 (85.3%)</td>
-<td>207 (85.2%)</td>
-<td>0.999</td>
-</tr>
-<tr class="odd">
-<td class="rowlabel lastrow">2</td>
-<td class="lastrow">21 (14.9%)</td>
-<td class="lastrow">15 (14.7%)</td>
-<td class="lastrow">36 (14.8%)</td>
-<td class="lastrow"></td>
-</tr>
-<tr class="even">
-<td class="rowlabel firstrow">Discont_Day</td>
+<td class="rowlabel firstrow">clif_c_score_day0</td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
@@ -1686,194 +1495,341 @@ $Cor
 </tr>
 <tr class="odd">
 <td class="rowlabel lastrow">Median [Q1, Q3]</td>
+<td class="lastrow">41 [36, 47]</td>
+<td class="lastrow">46 [40, 51]</td>
+<td class="lastrow">44 [37, 48]</td>
+<td class="lastrow">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="rowlabel firstrow">icu_admit</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">0</td>
+<td>81 (57.4%)</td>
+<td>33 (32.4%)</td>
+<td>114 (46.9%)</td>
+<td>&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="rowlabel">1</td>
+<td>60 (42.6%)</td>
+<td>68 (66.7%)</td>
+<td>128 (52.7%)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">Missing</td>
+<td class="lastrow">0 (0%)</td>
+<td class="lastrow">1 (1.0%)</td>
+<td class="lastrow">1 (0.4%)</td>
+<td class="lastrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel firstrow">criteria_1</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">0</td>
+<td>126 (89.4%)</td>
+<td>89 (87.3%)</td>
+<td>215 (88.5%)</td>
+<td>0.879</td>
+</tr>
+<tr class="even">
+<td class="rowlabel lastrow">1</td>
+<td class="lastrow">15 (10.6%)</td>
+<td class="lastrow">13 (12.7%)</td>
+<td class="lastrow">28 (11.5%)</td>
+<td class="lastrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel firstrow">criteria_2</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel">0</td>
+<td>89 (63.1%)</td>
+<td>45 (44.1%)</td>
+<td>134 (55.1%)</td>
+<td>0.0133</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">1</td>
+<td class="lastrow">52 (36.9%)</td>
+<td class="lastrow">57 (55.9%)</td>
+<td class="lastrow">109 (44.9%)</td>
+<td class="lastrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel firstrow">criteria_3</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">0</td>
+<td>136 (96.5%)</td>
+<td>97 (95.1%)</td>
+<td>233 (95.9%)</td>
+<td>0.871</td>
+</tr>
+<tr class="even">
+<td class="rowlabel lastrow">1</td>
+<td class="lastrow">5 (3.5%)</td>
+<td class="lastrow">5 (4.9%)</td>
+<td class="lastrow">10 (4.1%)</td>
+<td class="lastrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel firstrow">criteria_4</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel">0</td>
+<td>137 (97.2%)</td>
+<td>93 (91.2%)</td>
+<td>230 (94.7%)</td>
+<td>0.123</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">1</td>
+<td class="lastrow">4 (2.8%)</td>
+<td class="lastrow">9 (8.8%)</td>
+<td class="lastrow">13 (5.3%)</td>
+<td class="lastrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel firstrow">terli_route_day0</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">1</td>
+<td>120 (85.1%)</td>
+<td>87 (85.3%)</td>
+<td>207 (85.2%)</td>
+<td>0.999</td>
+</tr>
+<tr class="even">
+<td class="rowlabel lastrow">2</td>
+<td class="lastrow">21 (14.9%)</td>
+<td class="lastrow">15 (14.7%)</td>
+<td class="lastrow">36 (14.8%)</td>
+<td class="lastrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel firstrow">Discont_Day</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel lastrow">Median [Q1, Q3]</td>
 <td class="lastrow">3.0 [2.0, 6.0]</td>
 <td class="lastrow">3.0 [1.3, 4.0]</td>
 <td class="lastrow">3.0 [2.0, 5.0]</td>
 <td class="lastrow">0.162</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel firstrow">albumin_before_terli</td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel">0</td>
 <td>15 (10.6%)</td>
 <td>9 (8.8%)</td>
 <td>24 (9.9%)</td>
 <td>0.896</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel lastrow">1</td>
 <td class="lastrow">126 (89.4%)</td>
 <td class="lastrow">93 (91.2%)</td>
 <td class="lastrow">219 (90.1%)</td>
 <td class="lastrow"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel firstrow">totalalbumin_before_terli</td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel">Median [Q1, Q3]</td>
 <td>200 [100, 300]</td>
 <td>230 [150, 350]</td>
 <td>200 [130, 350]</td>
 <td>0.0633</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel lastrow">Missing</td>
 <td class="lastrow">16 (11.3%)</td>
 <td class="lastrow">9 (8.8%)</td>
 <td class="lastrow">25 (10.3%)</td>
 <td class="lastrow"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel firstrow">hrs_responders</td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel">0</td>
 <td>55 (39.0%)</td>
 <td>54 (52.9%)</td>
 <td>109 (44.9%)</td>
 <td>0.283</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel">1</td>
 <td>38 (27.0%)</td>
 <td>24 (23.5%)</td>
 <td>62 (25.5%)</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel lastrow">2</td>
 <td class="lastrow">48 (34.0%)</td>
 <td class="lastrow">24 (23.5%)</td>
 <td class="lastrow">72 (29.6%)</td>
 <td class="lastrow"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel firstrow">hrs_responders_cat_2</td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel">0</td>
 <td>55 (39.0%)</td>
 <td>54 (52.9%)</td>
 <td>109 (44.9%)</td>
 <td>0.098</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel lastrow">1</td>
 <td class="lastrow">86 (61.0%)</td>
 <td class="lastrow">48 (47.1%)</td>
 <td class="lastrow">134 (55.1%)</td>
 <td class="lastrow"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel firstrow">albvolume_before_terli</td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel">Median [Q1, Q3]</td>
 <td>800 [400, 1400]</td>
 <td>950 [700, 1600]</td>
 <td>900 [500, 1500]</td>
 <td>0.0807</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel lastrow">Missing</td>
 <td class="lastrow">22 (15.6%)</td>
 <td class="lastrow">13 (12.7%)</td>
 <td class="lastrow">35 (14.4%)</td>
 <td class="lastrow"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel firstrow">death_status_90days_init</td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel">0</td>
 <td>141 (100%)</td>
 <td>0 (0%)</td>
 <td>141 (58.0%)</td>
 <td>&lt;0.001</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel lastrow">1</td>
 <td class="lastrow">0 (0%)</td>
 <td class="lastrow">102 (100%)</td>
 <td class="lastrow">102 (42.0%)</td>
 <td class="lastrow"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel firstrow">rrt_2</td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel">0</td>
 <td>107 (75.9%)</td>
 <td>61 (59.8%)</td>
 <td>168 (69.1%)</td>
 <td>0.0277</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel lastrow">1</td>
 <td class="lastrow">34 (24.1%)</td>
 <td class="lastrow">41 (40.2%)</td>
 <td class="lastrow">75 (30.9%)</td>
 <td class="lastrow"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel firstrow">location_terli_day0</td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 <td class="firstrow"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel">1</td>
 <td>84 (59.6%)</td>
 <td>52 (51.0%)</td>
 <td>136 (56.0%)</td>
 <td>0.489</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel">2</td>
 <td>25 (17.7%)</td>
 <td>17 (16.7%)</td>
 <td>42 (17.3%)</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="rowlabel">3</td>
 <td>26 (18.4%)</td>
 <td>29 (28.4%)</td>
 <td>55 (22.6%)</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="rowlabel lastrow">Missing</td>
 <td class="lastrow">6 (4.3%)</td>
 <td class="lastrow">4 (3.9%)</td>
@@ -1919,15 +1875,15 @@ Total Observations in Table:  102
 
  
                          | master_death$meld_na_cat3 
-master_death$meld_3_cat3 |       &lt;25 |       &gt;35 |   25 - 35 | Row Total | 
+master_death$meld_3_cat3 |   25 - 35 |       &lt;25 |       &gt;35 | Row Total | 
 -------------------------|-----------|-----------|-----------|-----------|
-                     &lt;25 |         2 |         0 |         1 |         3 | 
+                 25 - 35 |        36 |         1 |         0 |        37 | 
 -------------------------|-----------|-----------|-----------|-----------|
-                     &gt;35 |         0 |        45 |        17 |        62 | 
+                     &lt;25 |         1 |         2 |         0 |         3 | 
 -------------------------|-----------|-----------|-----------|-----------|
-                 25 - 35 |         1 |         0 |        36 |        37 | 
+                     &gt;35 |        17 |         0 |        45 |        62 | 
 -------------------------|-----------|-----------|-----------|-----------|
-            Column Total |         3 |        45 |        54 |       102 | 
+            Column Total |        54 |         3 |        45 |       102 | 
 -------------------------|-----------|-----------|-----------|-----------|
 
  </code></pre>
@@ -2077,9 +2033,385 @@ AUC of roc1 AUC of roc2
   0.5654526   0.5981446 </code></pre>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="logistic-regression-roc-rrt-during-hospitalization" class="level1">
+<h1>Logistic Regression ROC — RRT During Hospitalization</h1>
+<p>Outcome: <code>rrt_2</code> (0 = no RRT, 1 = RRT during hospitalization). Each day-0 score is entered as a single predictor in a logistic regression; predicted probabilities are then evaluated by ROC. Each score is compared with MELD 3.0 via DeLong’s test.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show RRT logistic models + ROC</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>model_rrt_day0_meld         <span class="ot">&lt;-</span> <span class="fu">glm</span>(rrt_2 <span class="sc">~</span> day0_meld,         <span class="at">data =</span> master, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>model_rrt_day0_meld_na      <span class="ot">&lt;-</span> <span class="fu">glm</span>(rrt_2 <span class="sc">~</span> day0_meld_na,      <span class="at">data =</span> master, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>model_rrt_day0_meld_3       <span class="ot">&lt;-</span> <span class="fu">glm</span>(rrt_2 <span class="sc">~</span> day0_meld_3,       <span class="at">data =</span> master, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>model_rrt_clif_c_score_day0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(rrt_2 <span class="sc">~</span> clif_c_score_day0, <span class="at">data =</span> master, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>master<span class="sc">$</span>pred_rrt_day0_meld    <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_rrt_day0_meld,         <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>master<span class="sc">$</span>pred_rrt_day0_meld_na <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_rrt_day0_meld_na,      <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>master<span class="sc">$</span>pred_rrt_day0_meld_3  <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_rrt_day0_meld_3,       <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>master<span class="sc">$</span>pred_rrt_clif         <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_rrt_clif_c_score_day0, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>roc_rrt_meld_3 <span class="ot">&lt;-</span> <span class="fu">roc</span>(master<span class="sc">$</span>rrt_2, master<span class="sc">$</span>pred_rrt_day0_meld_3,  <span class="at">ci =</span> <span class="cn">TRUE</span>, <span class="at">direction =</span> <span class="st">"&lt;"</span>)</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>roc_rrt_meld   <span class="ot">&lt;-</span> <span class="fu">roc</span>(master<span class="sc">$</span>rrt_2, master<span class="sc">$</span>pred_rrt_day0_meld,    <span class="at">ci =</span> <span class="cn">TRUE</span>, <span class="at">direction =</span> <span class="st">"&lt;"</span>)</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>roc_rrt_na     <span class="ot">&lt;-</span> <span class="fu">roc</span>(master<span class="sc">$</span>rrt_2, master<span class="sc">$</span>pred_rrt_day0_meld_na, <span class="at">ci =</span> <span class="cn">TRUE</span>, <span class="at">direction =</span> <span class="st">"&lt;"</span>)</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>roc_rrt_clif   <span class="ot">&lt;-</span> <span class="fu">roc</span>(master<span class="sc">$</span>rrt_2, master<span class="sc">$</span>pred_rrt_clif,         <span class="at">ci =</span> <span class="cn">TRUE</span>, <span class="at">direction =</span> <span class="st">"&lt;"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="meld-3.0-1" class="level2">
+<h2 class="anchored" data-anchor-id="meld-3.0-1">MELD 3.0</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>roc_rrt_meld_3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+roc.default(response = master$rrt_2, predictor = master$pred_rrt_day0_meld_3,     direction = "&lt;", ci = TRUE)
+
+Data: master$pred_rrt_day0_meld_3 in 168 controls (master$rrt_2 0) &lt; 75 cases (master$rrt_2 1).
+Area under the curve: 0.6551
+95% CI: 0.5791-0.7311 (DeLong)</code></pre>
+</div>
+</div>
+</section>
+<section id="meld-vs-meld-3.0-2" class="level2">
+<h2 class="anchored" data-anchor-id="meld-vs-meld-3.0-2">MELD vs MELD 3.0</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>roc_rrt_meld</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+roc.default(response = master$rrt_2, predictor = master$pred_rrt_day0_meld,     direction = "&lt;", ci = TRUE)
+
+Data: master$pred_rrt_day0_meld in 168 controls (master$rrt_2 0) &lt; 75 cases (master$rrt_2 1).
+Area under the curve: 0.6263
+95% CI: 0.5486-0.704 (DeLong)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc.test</span>(roc_rrt_meld, roc_rrt_meld_3, <span class="at">method =</span> <span class="st">"delong"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    DeLong's test for two correlated ROC curves
+
+data:  roc_rrt_meld and roc_rrt_meld_3
+Z = -1.9258, p-value = 0.05413
+alternative hypothesis: true difference in AUC is not equal to 0
+95 percent confidence interval:
+ -0.0581301714  0.0005111238
+sample estimates:
+AUC of roc1 AUC of roc2 
+  0.6262698   0.6550794 </code></pre>
+</div>
+</div>
+</section>
+<section id="meld-na-vs-meld-3.0-2" class="level2">
+<h2 class="anchored" data-anchor-id="meld-na-vs-meld-3.0-2">MELD-Na vs MELD 3.0</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>roc_rrt_na</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+roc.default(response = master$rrt_2, predictor = master$pred_rrt_day0_meld_na,     direction = "&lt;", ci = TRUE)
+
+Data: master$pred_rrt_day0_meld_na in 168 controls (master$rrt_2 0) &lt; 75 cases (master$rrt_2 1).
+Area under the curve: 0.6359
+95% CI: 0.5595-0.7123 (DeLong)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc.test</span>(roc_rrt_na, roc_rrt_meld_3, <span class="at">method =</span> <span class="st">"delong"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    DeLong's test for two correlated ROC curves
+
+data:  roc_rrt_na and roc_rrt_meld_3
+Z = -1.9611, p-value = 0.04986
+alternative hypothesis: true difference in AUC is not equal to 0
+95 percent confidence interval:
+ -3.832179e-02 -1.153995e-05
+sample estimates:
+AUC of roc1 AUC of roc2 
+  0.6359127   0.6550794 </code></pre>
+</div>
+</div>
+</section>
+<section id="clif-c-vs-meld-3.0-2" class="level2">
+<h2 class="anchored" data-anchor-id="clif-c-vs-meld-3.0-2">CLIF-C vs MELD 3.0</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>roc_rrt_clif</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+roc.default(response = master$rrt_2, predictor = master$pred_rrt_clif,     direction = "&lt;", ci = TRUE)
+
+Data: master$pred_rrt_clif in 168 controls (master$rrt_2 0) &lt; 75 cases (master$rrt_2 1).
+Area under the curve: 0.6406
+95% CI: 0.5678-0.7134 (DeLong)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">roc.test</span>(roc_rrt_clif, roc_rrt_meld_3, <span class="at">method =</span> <span class="st">"delong"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    DeLong's test for two correlated ROC curves
+
+data:  roc_rrt_clif and roc_rrt_meld_3
+Z = -0.38182, p-value = 0.7026
+alternative hypothesis: true difference in AUC is not equal to 0
+95 percent confidence interval:
+ -0.08859151  0.05970262
+sample estimates:
+AUC of roc1 AUC of roc2 
+  0.6406349   0.6550794 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="cross-tabulation-meld-3.0-vs-meld-na-categories-survivors-90-day" class="level1">
+<h1>Cross-Tabulation — MELD 3.0 vs MELD-Na Categories (Survivors, 90-Day)</h1>
+<p>Same cells as the decedent cross-tab above, but restricted to patients alive at 90 days (<code>death_status_90days_init == 0</code>). Rows = MELD 3.0 strata; columns = MELD-Na strata. Each cell is a count of survivors falling into that pair of categories.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>master_alive <span class="ot">&lt;-</span> master <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(death_status_90days_init <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">meld_3_cat3  =</span> <span class="fu">case_when</span>(day0_meld_3  <span class="sc">&lt;</span> <span class="dv">25</span> <span class="sc">~</span> <span class="st">"&lt;25"</span>,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>                             day0_meld_3  <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> day0_meld_3  <span class="sc">&lt;=</span> <span class="dv">35</span> <span class="sc">~</span> <span class="st">"25 - 35"</span>,</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>                             day0_meld_3  <span class="sc">&gt;</span> <span class="dv">35</span> <span class="sc">~</span> <span class="st">"&gt;35"</span>),</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">meld_na_cat3 =</span> <span class="fu">case_when</span>(day0_meld_na <span class="sc">&lt;</span> <span class="dv">25</span> <span class="sc">~</span> <span class="st">"&lt;25"</span>,</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>                             day0_meld_na <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> day0_meld_na <span class="sc">&lt;=</span> <span class="dv">35</span> <span class="sc">~</span> <span class="st">"25 - 35"</span>,</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>                             day0_meld_na <span class="sc">&gt;</span> <span class="dv">35</span> <span class="sc">~</span> <span class="st">"&gt;35"</span>)</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>gmodels<span class="sc">::</span><span class="fu">CrossTable</span>(</span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>  master_alive<span class="sc">$</span>meld_3_cat3,</span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>  master_alive<span class="sc">$</span>meld_na_cat3,</span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop.r =</span> <span class="cn">FALSE</span>, <span class="at">prop.c =</span> <span class="cn">FALSE</span>, <span class="at">prop.t =</span> <span class="cn">FALSE</span>, <span class="at">prop.chisq =</span> <span class="cn">FALSE</span>, <span class="at">chisq =</span> <span class="cn">FALSE</span></span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 
+   Cell Contents
+|-------------------------|
+|                       N |
+|-------------------------|
+
+ 
+Total Observations in Table:  141 
+
+ 
+                         | master_alive$meld_na_cat3 
+master_alive$meld_3_cat3 |   25 - 35 |       &lt;25 |       &gt;35 | Row Total | 
+-------------------------|-----------|-----------|-----------|-----------|
+                 25 - 35 |        64 |         5 |         0 |        69 | 
+-------------------------|-----------|-----------|-----------|-----------|
+                     &lt;25 |         2 |        16 |         0 |        18 | 
+-------------------------|-----------|-----------|-----------|-----------|
+                     &gt;35 |        17 |         0 |        37 |        54 | 
+-------------------------|-----------|-----------|-----------|-----------|
+            Column Total |        83 |        21 |        37 |       141 | 
+-------------------------|-----------|-----------|-----------|-----------|
+
+ </code></pre>
+</div>
+</div>
+</section>
+<section id="categorical-nri-meld-3.0-vs-meld-na-3-strata-25-2535-35" class="level1">
+<h1>Categorical NRI — MELD 3.0 vs MELD-Na (3 strata: &lt;25, 25–35, &gt;35)</h1>
+<p>Reclassification uses three identical strata for both scores (&lt;25, 25–35, &gt;35). Movement is defined as the change in stratum from MELD-Na (reference) to MELD 3.0 (new):</p>
+<ul>
+<li>“up” — MELD 3.0 places the patient in a higher stratum than MELD-Na</li>
+<li>“down” — MELD 3.0 places the patient in a lower stratum than MELD-Na</li>
+<li>“same” — identical stratum</li>
+</ul>
+<p>For events (death by 90 days) upward movement is favourable (patient correctly reclassified to higher risk); for non-events (alive at 90 days) downward movement is favourable. Variance follows the standard Pencina formulation assuming independence of event and non-event components.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show categorical NRI</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>master_nri <span class="ot">&lt;-</span> master <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(death_status_90days_init),</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(day0_meld_3),</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(day0_meld_na)</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">meld_3_cat3 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>      day0_meld_3 <span class="sc">&lt;</span> <span class="dv">25</span>                     <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>      day0_meld_3 <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> day0_meld_3 <span class="sc">&lt;=</span> <span class="dv">35</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>      day0_meld_3 <span class="sc">&gt;</span> <span class="dv">35</span>                     <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">meld_na_cat3 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>      day0_meld_na <span class="sc">&lt;</span> <span class="dv">25</span>                      <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a>      day0_meld_na <span class="sc">&gt;=</span> <span class="dv">25</span> <span class="sc">&amp;</span> day0_meld_na <span class="sc">&lt;=</span> <span class="dv">35</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a>      day0_meld_na <span class="sc">&gt;</span> <span class="dv">35</span>                      <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb60-18"><a href="#cb60-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">move =</span> <span class="fu">case_when</span>(</span>
+<span id="cb60-19"><a href="#cb60-19" aria-hidden="true" tabindex="-1"></a>      meld_3_cat3 <span class="sc">&gt;</span> meld_na_cat3 <span class="sc">~</span> <span class="st">"up"</span>,</span>
+<span id="cb60-20"><a href="#cb60-20" aria-hidden="true" tabindex="-1"></a>      meld_3_cat3 <span class="sc">&lt;</span> meld_na_cat3 <span class="sc">~</span> <span class="st">"down"</span>,</span>
+<span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span>                       <span class="sc">~</span> <span class="st">"same"</span></span>
+<span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb60-23"><a href="#cb60-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-25"><a href="#cb60-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Events (90-day deaths)</span></span>
+<span id="cb60-26"><a href="#cb60-26" aria-hidden="true" tabindex="-1"></a>event_res <span class="ot">&lt;-</span> master_nri <span class="sc">%&gt;%</span></span>
+<span id="cb60-27"><a href="#cb60-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(death_status_90days_init <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-28"><a href="#cb60-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb60-29"><a href="#cb60-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_event      =</span> <span class="fu">n</span>(),</span>
+<span id="cb60-30"><a href="#cb60-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_up_event   =</span> <span class="fu">mean</span>(move <span class="sc">==</span> <span class="st">"up"</span>),</span>
+<span id="cb60-31"><a href="#cb60-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_down_event =</span> <span class="fu">mean</span>(move <span class="sc">==</span> <span class="st">"down"</span>),</span>
+<span id="cb60-32"><a href="#cb60-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">nri_event    =</span> p_up_event <span class="sc">-</span> p_down_event,</span>
+<span id="cb60-33"><a href="#cb60-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_event    =</span> (p_up_event <span class="sc">+</span> p_down_event <span class="sc">-</span> (p_up_event <span class="sc">-</span> p_down_event)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> n_event</span>
+<span id="cb60-34"><a href="#cb60-34" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb60-35"><a href="#cb60-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-36"><a href="#cb60-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Non-events (alive at 90 days)</span></span>
+<span id="cb60-37"><a href="#cb60-37" aria-hidden="true" tabindex="-1"></a>nonevent_res <span class="ot">&lt;-</span> master_nri <span class="sc">%&gt;%</span></span>
+<span id="cb60-38"><a href="#cb60-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(death_status_90days_init <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-39"><a href="#cb60-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb60-40"><a href="#cb60-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_nonevent      =</span> <span class="fu">n</span>(),</span>
+<span id="cb60-41"><a href="#cb60-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_down_nonevent =</span> <span class="fu">mean</span>(move <span class="sc">==</span> <span class="st">"down"</span>),</span>
+<span id="cb60-42"><a href="#cb60-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_up_nonevent   =</span> <span class="fu">mean</span>(move <span class="sc">==</span> <span class="st">"up"</span>),</span>
+<span id="cb60-43"><a href="#cb60-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">nri_nonevent    =</span> p_down_nonevent <span class="sc">-</span> p_up_nonevent,</span>
+<span id="cb60-44"><a href="#cb60-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_nonevent    =</span> (p_down_nonevent <span class="sc">+</span> p_up_nonevent <span class="sc">-</span> (p_down_nonevent <span class="sc">-</span> p_up_nonevent)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> n_nonevent</span>
+<span id="cb60-45"><a href="#cb60-45" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb60-46"><a href="#cb60-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-47"><a href="#cb60-47" aria-hidden="true" tabindex="-1"></a>nri_total <span class="ot">&lt;-</span> event_res<span class="sc">$</span>nri_event <span class="sc">+</span> nonevent_res<span class="sc">$</span>nri_nonevent</span>
+<span id="cb60-48"><a href="#cb60-48" aria-hidden="true" tabindex="-1"></a>var_total <span class="ot">&lt;-</span> event_res<span class="sc">$</span>var_event <span class="sc">+</span> nonevent_res<span class="sc">$</span>var_nonevent</span>
+<span id="cb60-49"><a href="#cb60-49" aria-hidden="true" tabindex="-1"></a>se_total  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_total)</span>
+<span id="cb60-50"><a href="#cb60-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-51"><a href="#cb60-51" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="ot">&lt;-</span> nri_total <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se_total</span>
+<span id="cb60-52"><a href="#cb60-52" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="ot">&lt;-</span> nri_total <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se_total</span>
+<span id="cb60-53"><a href="#cb60-53" aria-hidden="true" tabindex="-1"></a>z_value  <span class="ot">&lt;-</span> nri_total <span class="sc">/</span> se_total</span>
+<span id="cb60-54"><a href="#cb60-54" aria-hidden="true" tabindex="-1"></a>p_value  <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(z_value))</span>
+<span id="cb60-55"><a href="#cb60-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-56"><a href="#cb60-56" aria-hidden="true" tabindex="-1"></a>cat_nri_result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb60-57"><a href="#cb60-57" aria-hidden="true" tabindex="-1"></a>  <span class="at">event_res    =</span> event_res,</span>
+<span id="cb60-58"><a href="#cb60-58" aria-hidden="true" tabindex="-1"></a>  <span class="at">nonevent_res =</span> nonevent_res,</span>
+<span id="cb60-59"><a href="#cb60-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">nri_total    =</span> nri_total,</span>
+<span id="cb60-60"><a href="#cb60-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">se_total     =</span> se_total,</span>
+<span id="cb60-61"><a href="#cb60-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci_95        =</span> <span class="fu">c</span>(ci_lower, ci_upper),</span>
+<span id="cb60-62"><a href="#cb60-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">z_value      =</span> z_value,</span>
+<span id="cb60-63"><a href="#cb60-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_value      =</span> p_value</span>
+<span id="cb60-64"><a href="#cb60-64" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb60-65"><a href="#cb60-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-66"><a href="#cb60-66" aria-hidden="true" tabindex="-1"></a>cat_nri_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$event_res
+  n_event p_up_event p_down_event nri_event  var_event
+1     102  0.1764706  0.009803922 0.1666667 0.00155389
+
+$nonevent_res
+  n_nonevent p_down_nonevent p_up_nonevent nri_nonevent var_nonevent
+1        141       0.0141844     0.1560284    -0.141844   0.00106449
+
+$nri_total
+[1] 0.0248227
+
+$se_total
+[1] 0.0511701
+
+$ci_95
+[1] -0.0754707  0.1251161
+
+$z_value
+[1] 0.4851015
+
+$p_value
+[1] 0.6276043</code></pre>
+</div>
+</div>
+<p><strong>Interpretation.</strong> <code>nri_event</code> is the net proportion of 90-day decedents who moved <em>upward</em> by one or more strata when switching from MELD-Na to MELD 3.0; <code>nri_nonevent</code> is the net proportion of survivors who moved <em>downward</em>. <code>nri_total</code> is their sum (range roughly −2 to +2). Positive values favour MELD 3.0. 95% CI and p-value assume large-sample normality of each component; small event counts in individual cells can make the Wald-type variance unstable — treat borderline p-values cautiously.</p>
+</section>
+<section id="continuous-nri-meld-3.0-vs-meld-na-raw-score-comparison" class="level1">
+<h1>Continuous NRI — MELD 3.0 vs MELD-Na (raw-score comparison)</h1>
+<p><strong>Nuance / caveat.</strong> This implementation follows the user-specified formulation: movement is defined by the direction of difference between the two <em>raw scores</em> (<code>day0_meld_3</code> vs <code>day0_meld_na</code>), rather than between predicted probabilities from two logistic/Cox models (the classical Pencina continuous NRI). MELD 3.0 and MELD-Na are on <em>different scales</em> — MELD 3.0 adds a baseline intercept (+6), a female adjustment (+1.33), and explicit albumin and interaction terms, whereas MELD-Na layers a sodium penalty on top of the original MELD. Consequently, for a large fraction of patients the raw-score comparison will register as “up” purely because MELD 3.0 tends to produce a numerically larger score, independent of any true reclassification improvement. The resulting “event” NRI component is therefore likely to be close to the baseline proportion of patients with <code>day0_meld_3 &gt; day0_meld_na</code>, and the “non-event” component its complement. Use this metric descriptively; do not interpret it as the Pencina continuous NRI.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show continuous NRI (raw-score)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>master_cf <span class="ot">&lt;-</span> master <span class="sc">%&gt;%</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(death_status_90days_init),</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(day0_meld_3),</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(day0_meld_na)</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">move =</span> <span class="fu">case_when</span>(</span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>      day0_meld_3 <span class="sc">&gt;</span> day0_meld_na <span class="sc">~</span> <span class="st">"up"</span>,</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>      day0_meld_3 <span class="sc">&lt;</span> day0_meld_na <span class="sc">~</span> <span class="st">"down"</span>,</span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span>                       <span class="sc">~</span> <span class="st">"same"</span></span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>event_res <span class="ot">&lt;-</span> master_cf <span class="sc">%&gt;%</span></span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(death_status_90days_init <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_event      =</span> <span class="fu">n</span>(),</span>
+<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_up_event   =</span> <span class="fu">mean</span>(move <span class="sc">==</span> <span class="st">"up"</span>),</span>
+<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_down_event =</span> <span class="fu">mean</span>(move <span class="sc">==</span> <span class="st">"down"</span>),</span>
+<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">nri_event    =</span> p_up_event <span class="sc">-</span> p_down_event,</span>
+<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_event    =</span> (p_up_event <span class="sc">+</span> p_down_event <span class="sc">-</span> (p_up_event <span class="sc">-</span> p_down_event)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> n_event</span>
+<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-25"><a href="#cb62-25" aria-hidden="true" tabindex="-1"></a>nonevent_res <span class="ot">&lt;-</span> master_cf <span class="sc">%&gt;%</span></span>
+<span id="cb62-26"><a href="#cb62-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(death_status_90days_init <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-27"><a href="#cb62-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb62-28"><a href="#cb62-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_nonevent      =</span> <span class="fu">n</span>(),</span>
+<span id="cb62-29"><a href="#cb62-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_down_nonevent =</span> <span class="fu">mean</span>(move <span class="sc">==</span> <span class="st">"down"</span>),</span>
+<span id="cb62-30"><a href="#cb62-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_up_nonevent   =</span> <span class="fu">mean</span>(move <span class="sc">==</span> <span class="st">"up"</span>),</span>
+<span id="cb62-31"><a href="#cb62-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">nri_nonevent    =</span> p_down_nonevent <span class="sc">-</span> p_up_nonevent,</span>
+<span id="cb62-32"><a href="#cb62-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_nonevent    =</span> (p_down_nonevent <span class="sc">+</span> p_up_nonevent <span class="sc">-</span> (p_down_nonevent <span class="sc">-</span> p_up_nonevent)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> n_nonevent</span>
+<span id="cb62-33"><a href="#cb62-33" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb62-34"><a href="#cb62-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-35"><a href="#cb62-35" aria-hidden="true" tabindex="-1"></a>nri_total <span class="ot">&lt;-</span> event_res<span class="sc">$</span>nri_event <span class="sc">+</span> nonevent_res<span class="sc">$</span>nri_nonevent</span>
+<span id="cb62-36"><a href="#cb62-36" aria-hidden="true" tabindex="-1"></a>var_total <span class="ot">&lt;-</span> event_res<span class="sc">$</span>var_event <span class="sc">+</span> nonevent_res<span class="sc">$</span>var_nonevent</span>
+<span id="cb62-37"><a href="#cb62-37" aria-hidden="true" tabindex="-1"></a>se_total  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_total)</span>
+<span id="cb62-38"><a href="#cb62-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-39"><a href="#cb62-39" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="ot">&lt;-</span> nri_total <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se_total</span>
+<span id="cb62-40"><a href="#cb62-40" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="ot">&lt;-</span> nri_total <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se_total</span>
+<span id="cb62-41"><a href="#cb62-41" aria-hidden="true" tabindex="-1"></a>z_value  <span class="ot">&lt;-</span> nri_total <span class="sc">/</span> se_total</span>
+<span id="cb62-42"><a href="#cb62-42" aria-hidden="true" tabindex="-1"></a>p_value  <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(z_value))</span>
+<span id="cb62-43"><a href="#cb62-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-44"><a href="#cb62-44" aria-hidden="true" tabindex="-1"></a>cont_nri_result <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb62-45"><a href="#cb62-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_event      =</span> event_res<span class="sc">$</span>n_event,</span>
+<span id="cb62-46"><a href="#cb62-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_nonevent   =</span> nonevent_res<span class="sc">$</span>n_nonevent,</span>
+<span id="cb62-47"><a href="#cb62-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">nri_event    =</span> event_res<span class="sc">$</span>nri_event,</span>
+<span id="cb62-48"><a href="#cb62-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">nri_nonevent =</span> nonevent_res<span class="sc">$</span>nri_nonevent,</span>
+<span id="cb62-49"><a href="#cb62-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">nri_total    =</span> nri_total,</span>
+<span id="cb62-50"><a href="#cb62-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">se_total     =</span> se_total,</span>
+<span id="cb62-51"><a href="#cb62-51" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci_lower     =</span> ci_lower,</span>
+<span id="cb62-52"><a href="#cb62-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci_upper     =</span> ci_upper,</span>
+<span id="cb62-53"><a href="#cb62-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">z_value      =</span> z_value,</span>
+<span id="cb62-54"><a href="#cb62-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_value      =</span> p_value</span>
+<span id="cb62-55"><a href="#cb62-55" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb62-56"><a href="#cb62-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-57"><a href="#cb62-57" aria-hidden="true" tabindex="-1"></a>cont_nri_result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  n_event n_nonevent nri_event nri_nonevent nri_total   se_total   ci_lower
+1     102        141 0.8529412   -0.6595745 0.1933667 0.07217797 0.05189788
+   ci_upper  z_value     p_value
+1 0.3348355 2.679027 0.007383654</code></pre>
+</div>
+</div>
+<p><strong>Interpretation.</strong> Any non-zero difference between the two raw scores counts as upward (favouring MELD 3.0) or downward movement; ties are ignored. Because of the scale offset discussed above, a large positive “event” NRI component here reflects the fact that MELD 3.0 scores are systematically higher than MELD-Na scores — not necessarily better risk ordering.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -2156,7 +2488,7 @@ AUC of roc1 AUC of roc2
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/Tianqi-Ouyang\.github\.io\/Terli-Prognostic-Score\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
